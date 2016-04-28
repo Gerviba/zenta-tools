@@ -1,0 +1,18 @@
+<checks>
+	<check
+		title="Missing issues"
+      	modelfile="testmodel.consistencycheck"
+      	modelbasepath="//(onlymodel|onlyinput)/entry"
+      	modelnamepath="@errorURL"
+      	modelvaluepath="@errorURL"
+        modelerrorid="@errorURL"
+      	inputfile="inputs/issues.xml"
+      	inputbasepath="//link"
+      	inputnamepath="@url"
+      	inputvaluepath="@url"
+        inputerrorid="@url"
+        errorURL="$p1"
+        errortitlestring="'foo'"
+        errordescription="'bar'"
+      	/>
+</checks>

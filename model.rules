@@ -12,8 +12,8 @@
 %.richescape: %.rich $(ZENTATOOLS)/xslt/unescape.xslt
 	saxon9 -xsl:$(ZENTATOOLS)/xslt/unescape.xslt -s:$< -o:$@
 
-%.docbook: %.richescape %.objlist $(ZENTATOOLS)/xslt/docbook.xslt %.consistencycheck $(ZENTATOOLS)/classes
-	saxon9 -xsl:$(ZENTATOOLS)/xslt/docbook.xslt -im:varlist -s:$< -o:$@ inconsistencyfile=$$(pwd)/$(basename $@).consistencycheck
+%.docbook: %.richescape %.objlist $(ZENTATOOLS)/xslt/docbook.xslt %.consistencycheck $(ZENTATOOLS)/classes inputs/%.issues.xml
+	saxon9 -xsl:$(ZENTATOOLS)/xslt/docbook.xslt -im:varlist -s:$< -o:$@ inconsistencyfile=$$(pwd)/$(basename $@).consistencycheck issuesfile=$$(pwd)/inputs/$(basename $@).issues.xml
 
 %.tabled.docbook: %.richescape %.objlist $(ZENTATOOLS)/xslt/docbook.xslt
 	saxon9 -xsl:$(ZENTATOOLS)/xslt/docbook.xslt -s:$< -o:$@

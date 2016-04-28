@@ -23,7 +23,11 @@ tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.
 	 saxon9 -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=$$(pwd)/xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
 
 testmodel.consistencycheck: testmodel.check testmodel.rich testmodel.objlist
-	saxon9 -xsl:/project/mag/adadocs/xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
+	saxon9 -xsl:xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
 
 testenv:
 	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/edemotest:xslt /bin/bash
+
+inputs/testmodel.issues.xml:
+	mkdir -p inputs
+	./bin/getGithubIssues https://api.github.com/repos/magwas/zenta-tools label:auto_inconsistency >inputs/testmodel.issues.xml

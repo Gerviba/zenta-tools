@@ -10,6 +10,7 @@ import net.sf.saxon.StandardURIResolver;
 
 public class RelativeUriResolver implements URIResolver {
 
+	@SuppressWarnings("deprecation")
 	public final URIResolver baseResolver = new StandardURIResolver();
 	@Override
 	public Source resolve(String href, String base) throws TransformerException {

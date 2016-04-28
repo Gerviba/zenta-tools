@@ -82,6 +82,7 @@
 	  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
 	  						<xsl:copy-of select="object|value"/>
 	  					</entry>
+	  					<xsl:message>onlyinput:<xsl:value-of select="@name"/>/<xsl:value-of select="@value"/>.</xsl:message>
 	  				</xsl:if>
 	  			</xsl:for-each>
 	  		</onlyinput>

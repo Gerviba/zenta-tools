@@ -418,5 +418,20 @@
         		$doc)
     	"/>
     </xsl:function>
-	
+
+	<xsl:function name="zenta:errorIssue">
+		<xsl:param name="entry"/>
+		<xsl:param name="issues"/>
+		<xsl:variable name="errissues" select="$issues//link[@url=$entry/@errorURL]/.."/>
+		<xsl:choose>
+			<xsl:when test="$errissues">
+				<xsl:apply-templates select="$errissues" mode="deviations"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<para>no related issues in tracker</para>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+
+
 </xsl:stylesheet>
