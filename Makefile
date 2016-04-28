@@ -30,4 +30,4 @@ testenv:
 
 inputs/testmodel.issues.xml:
 	mkdir -p inputs
-	./bin/getGithubIssues https://api.github.com/repos/magwas/zenta-tools label:auto_inconsistency >inputs/testmodel.issues.xml
+	./bin/getGithubIssues https://api.github.com label:auto_inconsistency+repo:magwas/zenta-tools >inputs/testmodel.issues.xml

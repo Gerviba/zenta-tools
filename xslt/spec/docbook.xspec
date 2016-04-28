@@ -320,6 +320,11 @@
       		'related issue: link test status: open',
       		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='maxOccurs_2b419353_abe82119_2']/listitem/para[2]//text())
       	)"/>
+      <x:expect label="issue link is okay"
+      	test="zenta:assertEquals(
+      		'https://github.com/magwas/zenta-tools/issues/2',
+      		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='maxOccurs_2b419353_abe82119_2']/listitem/para[2]/ulink/@url)
+      	)"/>
       <x:expect label="if no related issue, then we say so"
       	test="zenta:assertEquals(
       		'no related issues in tracker',

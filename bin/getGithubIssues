@@ -10,9 +10,11 @@ query=sys.argv[2]
 
 def getLinksFromBody(body):
     return re.findall(r"\[(?P<txt>[^[]*)\]\((?P<uri>[^)]*)",body)
-page = urllib.urlopen("{0}/issues?q={1}".format(uri,query))
+
+issuesUri="{0}/search/issues?q={1}".format(uri,query)
+page = urllib.urlopen(issuesUri)
 content = page.read()
-issues = json.loads(content)
+issues = json.loads(content)['items']
 print "<issues>"
 for issue in issues:
     #for (k,v) in issue.items():

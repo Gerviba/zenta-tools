@@ -11,7 +11,7 @@
 	<xsl:template match="issue"	mode="deviations">
 		<para>
 			related issue:
-			<ulink url="@url">
+			<ulink url="{@url}">
 				<xsl:value-of select="summary"/>
 			</ulink>
 			status:
