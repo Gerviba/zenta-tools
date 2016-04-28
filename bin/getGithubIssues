@@ -3,7 +3,6 @@
 import sys
 import json
 import urllib
-import dicttoxml
 import re
 
 uri=sys.argv[1]
