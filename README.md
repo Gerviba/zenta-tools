@@ -1,16 +1,20 @@
-# adadocs
-Documentation for ADA
+Documentation tools for zenta models.
 
-ADA is the Anonymous Digital Identifier (Anoním Digitális Azonosító).
 
-It consist of PDOauth, the SSO server, PDAnchor the cryptographic trust anchor,
-and this project, the documentation thereof.
+usage:
+include $(ZENTATOOLS)/model.rules in your makefile
+have a docbook.local.xslt stylesheet in the project directory. You can override templates and write functions used in consistencycheck here.
 
-This project contains the non-generated documentation for the code,
-and its build generates and publishes all the documentation.
+export ZENTATOOLS=/directory/of/zenta-tools
+export PATH=$ZENTATOOLS/bin:$PATH
 
-dependencies:
-Zenta at /opt/Zenta
-docbook-xsl
-saxon9 in path (a script called saxon9, which runs saxon 9HE)
+make <modelname>.compiled
+
+The following files are created in the <modelname> directory:
+
+- index.html: model documentation
+- pics: the images of model diagrams
+- structured.css: a css for the html files
+- tabled.html: model documentation in old tabled format
+- <modelname>.pdf: pdf model documentation
 

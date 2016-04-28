@@ -8,7 +8,6 @@
 			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                stylesheet="../objlist.xslt">
 
-	<x:variable name="testData" href="ADA.rich"/>
 
    <x:scenario label="output is an xml object list">
       <x:context select="$testData"/>

@@ -1,7 +1,7 @@
 
-ADADOCS=$(shell pwd)
+ZENTATOOLS=$(shell pwd)
 
-all: zentaworkaround tests testmodel.compiled ADA.compiled tmp/static
+all: zentaworkaround tests testmodel.compiled 
 
 include model.rules
 
@@ -17,9 +17,6 @@ classes: src/net/sf/saxon/trans/RelativeUriResolver.java
 clean:
 	git clean -fdx
 
-tmp:
-	mkdir -p tmp
-
 tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test
 
 %.test: xslt/spec/%.xspec testmodel.%
@@ -27,11 +24,6 @@ tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.
 
 testmodel.consistencycheck: testmodel.check testmodel.rich testmodel.objlist
 	saxon9 -xsl:/project/mag/adadocs/xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
-pdoauth:
-	scp -P 22022 -r shippable@demokracia.rulez.org:/var/www/adadocs/PDOauth/master pdoauth
-
-tmp/static: pdoauth tmp
-	cp -r pdoauth/html/ pdoauth/static/ tmp/
 
 testenv:
-	docker run --rm -p 5900:5900 -v $$(pwd):/adadocs -it magwas/edemotest:xslt /bin/bash
+	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/edemotest:xslt /bin/bash
