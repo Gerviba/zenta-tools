@@ -63,7 +63,7 @@
       />
 
       <x:expect label="number of values corresponds to relations of the object"
-      	test="count(//element[@name='Joe']/value)=1"
+      	test="count(//element[@name='Joe']/value)=3"
       />
 
       <x:expect label="there is an error if there are less than minOccurs instances of values of a relation type to an element"
@@ -112,18 +112,12 @@
    	<x:expect label="there is a minOccurs attribute for connections"
    		test="zenta:connection-by-names(/,'bob','Alain')/@minOccurs=3" />
 
-   	<x:expect label="minOccurs is zero for relations without minOccurs property"
-   		test="zenta:connection-by-names(/,'knife','Alain')/@minOccurs='0'" />
-   		
    	<x:expect label="there are connections for backward direction. the direction attribute is 2 there"
    		test="zenta:connection-by-names(/,'Odette','Joe')/@direction=2"/>
 
    	<x:expect label="there is a minOccurs attribute for backward connections"
    		test="exists(zenta:connection-by-names(/,'Odette','Joe')/@minOccurs)" />
 
-   	<x:expect label="minOccurs is zero for relations without minOccurs property also for backwards relations"
-   		test="zenta:connection-by-names(/,'Alain','knife')/@minOccurs='0'" />
-   		
    	<x:expect label="minOccurs is the part after '/' of the minOccurs property if that exists for backward relations"
    		test="zenta:connection-by-names(/,'Alain','bob')/@minOccurs='5'" />
    		
@@ -177,18 +171,12 @@
    	<x:expect label="there is a maxOccurs attribute for connections"
    		test="zenta:connection-by-names(/,'bob','Alain')/@maxOccurs=2" />
 
-   	<x:expect label="maxOccurs is zero for relations without maxOccurs property"
-   		test="zenta:connection-by-names(/,'knife','Alain')/@maxOccurs='0'" />
-   		
    	<x:expect label="there are connections for backward direction. the direction attribute is 2 there"
    		test="zenta:connection-by-names(/,'Odette','Joe')/@direction=2"/>
 
    	<x:expect label="there is a maxOccurs attribute for backward connections"
    		test="exists(zenta:connection-by-names(/,'Odette','Joe')/@maxOccurs)" />
 
-   	<x:expect label="maxOccurs is zero for relations without maxOccurs property also for backwards relations"
-   		test="zenta:connection-by-names(/,'Alain','knife')/@maxOccurs='0'" />
-   		
    	<x:expect label="maxOccurs is the part after '/' of the maxOccurs property if that exists for backward relations"
    		test="zenta:connection-by-names(/,'Odette','bob')/@maxOccurs='1'" />
 
@@ -198,7 +186,7 @@
       	test="//element[@name='Odette']/error/@type='maxOccursError'"
       />
 
-      <x:expect label="template elements have no errors for maxOccurs FIXME"
+      <x:expect label="template elements have no errors for maxOccurs"
       	test="//element[@name='man'] and not(//element[@name='man']/error/@type[@type='maxOccursError']='maxOccursError')"
       />
 
@@ -232,8 +220,6 @@
       <x:expect label="the maxOccurs message counts descendant relations as well"
       	test="//element[@name='bob']/error[@type='maxOccursError']/@maxOccurs=2"
       />
-      <x:expect label="maxOccurs=0 is treated as infinity"
-      	test="count(//element[@name='knife']/error[@type='maxOccursError'])=0"/>
 	</x:scenario>
 	<x:scenario label="errors have a deterministic ID">
       <x:expect label="the id for maxOccurs is created from the id of the element and the id and direction of the relations"
@@ -251,4 +237,19 @@
       
 
 	</x:scenario>
+   	<x:expect label="maxOccurs is one for relations without maxOccurs property"
+   		test="zenta:connection-by-names(/,'Joe','target1')/@maxOccurs='1'" />
+   	<x:expect label="maxOccurs is one for relations without maxOccurs property also for backwards relations"
+   		test="zenta:connection-by-names(/,'Joe','target1')/@maxOccurs='1'" />
+   	<x:expect label="minOccurs is one for relations without minOccurs property"
+   		test="zenta:assertEquals(
+	   		1,
+	   		zenta:connection-by-names(/,'Maurice','ent ity')/@minOccurs
+   		)" />
+   	<x:expect label="minOccurs is one for relations without minOccurs property also for backwards relations"
+   		test="zenta:connection-by-names(/,'ent ity','Maurice')/@minOccurs='1'" />
+      <x:expect label="maxOccurs=-1 is treated as infinity"
+      	test="count(//element[@name='mary']/error[@type='maxOccursError' and @name='pampers'])=0"/>
+      <x:expect label="minOccurs=-1 is treated as infinity"
+      	test="count(//element[@name='Kelly']/error[@type='minOccursError' and @name='raises'])=0"/>
 </x:description>

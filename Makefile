@@ -1,7 +1,7 @@
 
 ZENTATOOLS=$(shell pwd)
 
-all: zentaworkaround tests testmodel.compiled 
+all: zentaworkaround tests testmodel.compiled zenta-tools.compiled
 
 include model.rules
 
@@ -31,3 +31,6 @@ testenv:
 inputs/testmodel.issues.xml:
 	mkdir -p inputs
 	./bin/getGithubIssues https://api.github.com label:auto_inconsistency+repo:magwas/zenta-tools >inputs/testmodel.issues.xml
+
+inputs/zenta-tools.issues.xml: inputs/testmodel.issues.xml
+	cp inputs/testmodel.issues.xml inputs/zenta-tools.issues.xml

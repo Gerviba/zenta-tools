@@ -2,7 +2,10 @@
 <zenta:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zenta="http://magwas.rulez.org/zenta" name="Zenta tools" id="d7cca669" version="2.2.1">
   <folder name="Metamodel" id="8366a7f7">
     <element xsi:type="zenta:BasicObject" name="Basic Object" id="basicobject"/>
-    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject"/>
+    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject">
+      <property key="minOccurs" value="-1/-1"/>
+      <property key="maxOccurs" value="-1/-1"/>
+    </element>
     <element xsi:type="zenta:ZentaDiagramModel" name="Metamodel" id="cae0cfdb">
       <child xsi:type="zenta:DiagramObject" id="bb6b2ad6" fontColor="#ffffff" targetConnections="f463a6e3 1e70ea7a" fillColor="#144c03" elementShape="serviceShape" zentaElement="2af0bc20">
         <bounds x="316" y="165" width="-1" height="-1"/>

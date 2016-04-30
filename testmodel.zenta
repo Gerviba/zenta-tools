@@ -26,7 +26,10 @@
       <property key="Template"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="Basic Object" id="basicobject"/>
-    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject"/>
+    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject">
+      <property key="minOccurs" value="-1/-1"/>
+      <property key="maxOccurs" value="-1/-1"/>
+    </element>
     <element xsi:type="zenta:ZentaDiagramModel" name="Default View" id="3bd9d9b9"/>
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
       <documentation>a class directly descending from Basic Object</documentation>
@@ -51,7 +54,7 @@
       <property key="fontColor"/>
       <property key="lineWidth" value="1"/>
       <property key="font"/>
-      <property key="minOccurs" value="/1"/>
+      <property key="minOccurs" value="-1/1"/>
       <property key="maxOccurs" value="2/1"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="grandchild" id="a93354a0" ancestor="8d44c0ad">
@@ -70,7 +73,7 @@
       <property key="lineWidth" value="1"/>
       <property key="font"/>
       <property key="minOccurs" value="3/5"/>
-      <property key="maxOccurs" value="/"/>
+      <property key="maxOccurs" value="-1/-1"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="target" id="726069f8" ancestor="basicobject">
       <property key="fillColor"/>
@@ -102,6 +105,8 @@
       <property key="fontColor"/>
       <property key="lineWidth" value="1"/>
       <property key="font"/>
+      <property key="maxOccurs" value="-1/-1"/>
+      <property key="minOccurs" value="/"/>
     </element>
   </folder>
   <folder name="instances" id="faa91182">
@@ -109,7 +114,7 @@
     <folder name="1. subfolder" id="acef6ce3"/>
     <folder name="5.subfolder" id="75ea9bb9"/>
     <folder name="2. subfolder" id="51ca8fef"/>
-    <element xsi:type="zenta:ZentaDiagramModel" name="instances" id="3b787e15">
+    <element xsi:type="zenta:ZentaDiagramModel" name="instances" id="3b787e15" connectionRouterType="1">
       <child xsi:type="zenta:DiagramObject" id="d0048db4" zentaElement="f08125b1">
         <bounds x="227" y="73" width="-1" height="-1"/>
         <sourceConnection xsi:type="zenta:Connection" id="61b4add3" source="d0048db4" target="0a9db5eb" relationship="020b8d35"/>
@@ -117,6 +122,8 @@
       <child xsi:type="zenta:DiagramObject" id="6c09681b" zentaElement="1e7181c1">
         <bounds x="545" y="74" width="-1" height="-1"/>
         <sourceConnection xsi:type="zenta:Connection" id="ae6b6cd3" source="6c09681b" target="0d16fc27" relationship="2411fe2d"/>
+        <sourceConnection xsi:type="zenta:Connection" id="7618af52" source="6c09681b" target="52150abc" relationship="b723ce8c"/>
+        <sourceConnection xsi:type="zenta:Connection" id="ded0214a" source="6c09681b" target="40edf439" relationship="dfcfcb9a"/>
       </child>
       <child xsi:type="zenta:DiagramObject" id="0d16fc27" targetConnections="ae6b6cd3 36a99bd8 9aa7ef42" zentaElement="2d941c95">
         <bounds x="715" y="189" width="-1" height="-1"/>
@@ -153,6 +160,16 @@
       </child>
       <child xsi:type="zenta:DiagramObject" id="02d6eebc" targetConnections="c7d1e624" zentaElement="e77d6182">
         <bounds x="819" y="477" width="-1" height="-1"/>
+        <sourceConnection xsi:type="zenta:Connection" id="971e4b2f" source="02d6eebc" target="b9167b9b" relationship="ccac3ecc"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="52150abc" targetConnections="7618af52" zentaElement="22cedc6b">
+        <bounds x="941" y="126" width="-1" height="-1"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="40edf439" targetConnections="ded0214a" zentaElement="c0edcdac">
+        <bounds x="970" y="238" width="-1" height="-1"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="b9167b9b" targetConnections="971e4b2f" zentaElement="999327b8">
+        <bounds x="1003" y="410" width="-1" height="-1"/>
       </child>
     </element>
     <element xsi:type="zenta:BasicObject" name="knife" id="f08125b1" ancestor="basicobject"/>
@@ -179,10 +196,16 @@
     <element xsi:type="zenta:BasicObject" name="Maurice" id="e77d6182" ancestor="8d44c0ad"/>
     <element xsi:type="zenta:BasicRelationship" id="f8e80ced" ancestor="abe82119" source="9cd2039c" target="e77d6182"/>
     <element xsi:type="zenta:BasicRelationship" id="ed51a5a6" ancestor="abe82119" source="63fb6744" target="2b419353"/>
+    <element xsi:type="zenta:BasicObject" name="target1" id="22cedc6b" ancestor="726069f8"/>
+    <element xsi:type="zenta:BasicObject" name="target2" id="c0edcdac" ancestor="726069f8"/>
+    <element xsi:type="zenta:BasicRelationship" id="b723ce8c" ancestor="b8eb45ee" source="1e7181c1" target="22cedc6b"/>
+    <element xsi:type="zenta:BasicRelationship" id="dfcfcb9a" ancestor="b8eb45ee" source="1e7181c1" target="c0edcdac"/>
+    <element xsi:type="zenta:BasicObject" name="ent ity" id="999327b8" ancestor="6ab6df72"/>
+    <element xsi:type="zenta:BasicRelationship" id="ccac3ecc" ancestor="5466dc71" source="e77d6182" target="999327b8"/>
   </folder>
   <folder name="2. test folder" id="f2ad07d4"/>
   <folder name="1. test folder" id="0b8ec6fd">
-    <element xsi:type="zenta:ZentaDiagramModel" name="Meta for same named relations" id="b30cea76">
+    <element xsi:type="zenta:ZentaDiagramModel" name="Meta for same named relations" id="b30cea76" connectionRouterType="1">
       <child xsi:type="zenta:DiagramObject" id="cfc30e7d" targetConnections="3f56012f" zentaElement="2ea01c4d">
         <bounds x="210" y="92" width="-1" height="-1"/>
       </child>

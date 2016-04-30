@@ -138,8 +138,8 @@
 	<xsl:function name="zenta:occursNumber">
 		<xsl:param name="theString"/>
 		<xsl:choose>
-			<xsl:when test="empty($theString)">0</xsl:when>
-			<xsl:when test="$theString=''">0</xsl:when>
+			<xsl:when test="empty($theString)">1</xsl:when>
+			<xsl:when test="$theString=''">1</xsl:when>
 			<xsl:otherwise><xsl:value-of select="number($theString)"/></xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -171,9 +171,10 @@
 		<xsl:param name="doc"/>
 		<xsl:variable name="descendants" select="zenta:descendantRelationsFor($template,$element,$doc)"/>
 		<xsl:if test="
-			count($descendants)
-			&lt;
-			zenta:occursNumber(string($template/@minOccurs))
+			(zenta:occursNumber(string($template/@minOccurs)) != -1 ) and
+				(count($descendants)
+				&lt;
+				zenta:occursNumber(string($template/@minOccurs)))
 		">
 			<error type="minOccursError" element="{$element/@id}">
 				<xsl:copy-of select="$template/@id|$template/@name|$template/@minOccurs|$template/@source|$template/@target|$template/@direction"/>
@@ -181,7 +182,7 @@
 			</error>
 		</xsl:if>
 		<xsl:if test="
-			(zenta:occursNumber(string($template/@maxOccurs)) !=0) and
+			(zenta:occursNumber(string($template/@maxOccurs)) !=-1) and
 				(count($descendants)
 				&gt;
 				zenta:occursNumber(string($template/@maxOccurs)))
@@ -204,7 +205,7 @@
 				<xsl:copy-of select="zenta:getMinOccurs($doc,$doc//element[@id=$element/@ancestor])"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:copy-of select="'0'"/>
+				<xsl:copy-of select="'1'"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -220,7 +221,7 @@
 				<xsl:copy-of select="zenta:getMaxOccurs($doc,$doc//element[@id=$element/@ancestor])"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:copy-of select="'0'"/>
+				<xsl:copy-of select="'1'"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -394,8 +395,11 @@
     		else if ($relationcount > 0 )
     		then
     			'but have only '
-    		else
-    			'but have none '
+    		else if($errobj/@direction='1')
+    			then
+    				'but have none outgoing'
+    			else
+    				'but have none incoming'
     	"/>
     	<xsl:if test="$relationcount > 0 ">
 	    	<xsl:value-of select="$relationcount"/>

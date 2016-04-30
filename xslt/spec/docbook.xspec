@@ -46,14 +46,14 @@
 
 		<x:expect label="if there is a '/' in relation name, then the part before it is used for forward relation"
 	     	test="zenta:assertEquals(
-	     		'child plays with ent',
+	     		'child plays with at least 1 ent',
 	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='child']/listitem/para/itemizedlist/listitem[2]//text())
 	     		)
 	     		"/>
 
 		<x:expect label="if there is a '/' in relation name, then the part after it is used for backward relation"
 	     	test="zenta:assertEquals(
-	     		'ent is played with by child',
+	     		'ent is played with by at least 1 child',
 	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='ent']/listitem/para/itemizedlist/listitem//text())
 	     		)
 	     		"/>
@@ -288,7 +288,7 @@
 
       <x:expect label="minOccurs description is okay if no relations"
       	test="zenta:assertEquals(
-      		'Kelly should have at least 3 pampers relation, but have none',
+      		'Kelly should have at least 3 pampers relation, but have none outgoing',
       		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='minOccurs_2b419353_87d6b2d5_1']/listitem/para[1]//text())
       	)"/>
 
@@ -346,7 +346,7 @@
 	<x:scenario label="different relations with the same name treated as different">
       <x:expect label="minoccurs error is correctly reported"
       	test="zenta:assertEquals(
-      		'instance of other kind should have at least 1 relates relation, but have none',
+      		'instance of other kind should have at least 1 relates relation, but have none incoming',
       		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='minOccurs_a323c752_cbb9c3bf_2']/listitem/para[1]//text())
       	)"/>
    </x:scenario>
