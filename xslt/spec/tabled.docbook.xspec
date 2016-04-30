@@ -30,7 +30,7 @@
       <x:expect label="diagram remark is the diagram documentation"
         test="//figure[title='Metamodel diagram']/remark='Metamodel diagram documentation'"/>
       <x:expect label="document contains the picture of the diagram"
-        test="//figure[title='Metamodel diagram']/mediaobject/imageobject/imagedata/@fileref='pics/154fb1e4.png'"/>
+        test="//figure[title='Metamodel diagram']//imagedata/@fileref='pics/154fb1e4.png'"/>
         
       <x:expect label="elements follow the diagrams in the table"
         test="zenta:assertEquals(
