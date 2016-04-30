@@ -41,7 +41,9 @@
 			<para>
 				<xsl:copy-of select="documentation/(*|text())"/>
 			</para>
-			<xsl:apply-templates select="folder" mode="varlist"/>
+			<xsl:apply-templates select="folder" mode="varlist">
+				<xsl:sort select="@name"/>
+			</xsl:apply-templates>
 			<xsl:apply-templates select="." mode="varlistList"/>
 		</section>
 	</xsl:template>

@@ -331,4 +331,16 @@
       		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='minOccurs_2b419353_87d6b2d5_1']/listitem/para[2]//text())
       	)"/>
 	</x:scenario>
+	<x:scenario label="folders are sorted alphabetically">
+      <x:expect label="top level folders sorted"
+      	test="zenta:assertEquals(
+      		'1. test folder, 2. test folder, Metamodel, instances, Deviations',
+      		string-join(/article/section/title/text(),', ')
+      	)"/>
+      <x:expect label="subfolders sorted"
+      	test="zenta:assertEquals(
+      		'1. subfolder, 2. subfolder, 5.subfolder, Subfolder',
+      		string-join(//section[title='instances']/section/title/text(),', ')
+      	)"/>
+   </x:scenario>
 </x:description>

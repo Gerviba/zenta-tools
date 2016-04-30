@@ -104,9 +104,11 @@
       <property key="font"/>
     </element>
   </folder>
-  <folder name="model data" id="abd35f50"/>
   <folder name="instances" id="faa91182">
     <folder name="Subfolder" id="2912c49d"/>
+    <folder name="1. subfolder" id="acef6ce3"/>
+    <folder name="5.subfolder" id="75ea9bb9"/>
+    <folder name="2. subfolder" id="51ca8fef"/>
     <element xsi:type="zenta:ZentaDiagramModel" name="instances" id="3b787e15">
       <child xsi:type="zenta:DiagramObject" id="d0048db4" zentaElement="f08125b1">
         <bounds x="227" y="73" width="-1" height="-1"/>
@@ -178,7 +180,6 @@
     <element xsi:type="zenta:BasicRelationship" id="f8e80ced" ancestor="abe82119" source="9cd2039c" target="e77d6182"/>
     <element xsi:type="zenta:BasicRelationship" id="ed51a5a6" ancestor="abe82119" source="63fb6744" target="2b419353"/>
   </folder>
-  <folder name="maxOccurs doc test" id="6d60855a">
-    <element xsi:type="zenta:ZentaDiagramModel" name="maxOccurs" id="b760e633"/>
-  </folder>
+  <folder name="2. test folder" id="f2ad07d4"/>
+  <folder name="1. test folder" id="0b8ec6fd"/>
 </zenta:model>

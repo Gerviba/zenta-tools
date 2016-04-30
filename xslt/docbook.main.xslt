@@ -15,7 +15,9 @@
 
 	<xsl:template match="zenta:enriched" mode="#all">
 		<article version="5.0">
-	    	<xsl:apply-templates select="*" mode="#current"/>
+	    	<xsl:apply-templates select="*" mode="#current">
+	    		<xsl:sort select="@name"/>
+	    	</xsl:apply-templates>
 	    	<section>
 	    		<title>Deviations</title>
 	    		<xsl:apply-templates select="$inconsistencies//data" mode="deviations"/>
