@@ -181,5 +181,65 @@
     <element xsi:type="zenta:BasicRelationship" id="ed51a5a6" ancestor="abe82119" source="63fb6744" target="2b419353"/>
   </folder>
   <folder name="2. test folder" id="f2ad07d4"/>
-  <folder name="1. test folder" id="0b8ec6fd"/>
+  <folder name="1. test folder" id="0b8ec6fd">
+    <element xsi:type="zenta:ZentaDiagramModel" name="Meta for same named relations" id="b30cea76">
+      <child xsi:type="zenta:DiagramObject" id="cfc30e7d" targetConnections="3f56012f" zentaElement="2ea01c4d">
+        <bounds x="210" y="92" width="-1" height="-1"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="a4d62158" targetConnections="1d73e720" zentaElement="47abe2e9">
+        <bounds x="211" y="204" width="-1" height="-1"/>
+        <sourceConnection xsi:type="zenta:Connection" id="3f56012f" source="a4d62158" target="cfc30e7d" relationship="b6a828f0"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="0ceb43d8" zentaElement="c09841b1">
+        <bounds x="210" y="314" width="-1" height="-1"/>
+        <sourceConnection xsi:type="zenta:Connection" id="1d73e720" source="0ceb43d8" target="a4d62158" relationship="cbb9c3bf"/>
+      </child>
+      <property key="Template"/>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="one kind" id="2ea01c4d" ancestor="basicobject">
+      <property key="fillColor"/>
+      <property key="elementShape"/>
+      <property key="textAlignment" value="2"/>
+      <property key="fontColor"/>
+      <property key="font"/>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="other kind" id="47abe2e9" ancestor="basicobject">
+      <property key="fillColor"/>
+      <property key="elementShape"/>
+      <property key="textAlignment" value="2"/>
+      <property key="fontColor"/>
+      <property key="font"/>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="third kind" id="c09841b1" ancestor="basicobject">
+      <property key="fillColor"/>
+      <property key="elementShape"/>
+      <property key="textAlignment" value="2"/>
+      <property key="fontColor"/>
+      <property key="font"/>
+    </element>
+    <element xsi:type="zenta:BasicRelationship" name="relates" id="b6a828f0" ancestor="basicrelation" source="47abe2e9" target="2ea01c4d">
+      <property key="minOccurs" value="1/1"/>
+    </element>
+    <element xsi:type="zenta:BasicRelationship" name="relates" id="cbb9c3bf" ancestor="basicrelation" source="c09841b1" target="47abe2e9">
+      <property key="minOccurs" value="1/1"/>
+    </element>
+    <element xsi:type="zenta:ZentaDiagramModel" name="data for same named relations" id="3d2714eb">
+      <child xsi:type="zenta:DiagramObject" id="4db3c76e" zentaElement="a323c752">
+        <bounds x="279" y="195" width="-1" height="-1"/>
+        <sourceConnection xsi:type="zenta:Connection" id="36408a04" source="4db3c76e" target="3b5eda11" relationship="7b7a3c3a"/>
+        <sourceConnection xsi:type="zenta:Connection" id="59b9f086" source="4db3c76e" target="0217e454" relationship="44bc2b96"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="3b5eda11" targetConnections="36408a04" zentaElement="b0a21152">
+        <bounds x="300" y="85" width="-1" height="-1"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="0217e454" targetConnections="59b9f086" zentaElement="acb8d2f2">
+        <bounds x="501" y="82" height="75"/>
+      </child>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="instance of other kind" id="a323c752" ancestor="47abe2e9"/>
+    <element xsi:type="zenta:BasicObject" name="instance of one kind" id="b0a21152" ancestor="2ea01c4d"/>
+    <element xsi:type="zenta:BasicObject" name="another instance of one kind" id="acb8d2f2" ancestor="2ea01c4d"/>
+    <element xsi:type="zenta:BasicRelationship" id="7b7a3c3a" ancestor="b6a828f0" source="a323c752" target="b0a21152"/>
+    <element xsi:type="zenta:BasicRelationship" id="44bc2b96" ancestor="b6a828f0" source="a323c752" target="acb8d2f2"/>
+  </folder>
 </zenta:model>

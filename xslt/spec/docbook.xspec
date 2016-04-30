@@ -343,4 +343,11 @@
       		string-join(//section[title='instances']/section/title/text(),', ')
       	)"/>
    </x:scenario>
+	<x:scenario label="different relations with the same name treated as different">
+      <x:expect label="minoccurs error is correctly reported"
+      	test="zenta:assertEquals(
+      		'instance of other kind should have at least 1 relates relation, but have none',
+      		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='minOccurs_a323c752_cbb9c3bf_2']/listitem/para[1]//text())
+      	)"/>
+   </x:scenario>
 </x:description>

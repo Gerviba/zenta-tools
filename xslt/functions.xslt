@@ -358,7 +358,7 @@
     		</xsl:message>
     	</xsl:if>
     	<xsl:variable name="relations">
-    		<xsl:for-each select="$element/value[@ancestorName=$errobj/@name]">
+    		<xsl:for-each select="$element/value[@ancestor=$errobj/@id]">
 	    		<link linkend="{@target}">
 	    			<xsl:value-of select="@name"/>
 	    		</link>
@@ -367,7 +367,7 @@
 	    		</xsl:if>
     		</xsl:for-each>
     	</xsl:variable>
-    	<xsl:variable name="relationcount" select="count($element/value[@ancestorName=$errobj/@name])"/>
+    	<xsl:variable name="relationcount" select="count($element/value[@ancestor=$errobj/@id])"/>
     	<link linkend='{$element/@id}'>
     	<xsl:value-of select="$element/@name"/>
     	</link>
