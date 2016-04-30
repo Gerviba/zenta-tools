@@ -206,15 +206,15 @@
   <folder name="2. test folder" id="f2ad07d4"/>
   <folder name="1. test folder" id="0b8ec6fd">
     <element xsi:type="zenta:ZentaDiagramModel" name="Meta for same named relations" id="b30cea76" connectionRouterType="1">
-      <child xsi:type="zenta:DiagramObject" id="cfc30e7d" targetConnections="3f56012f" zentaElement="2ea01c4d">
-        <bounds x="210" y="92" width="-1" height="-1"/>
-      </child>
       <child xsi:type="zenta:DiagramObject" id="a4d62158" targetConnections="1d73e720" zentaElement="47abe2e9">
-        <bounds x="211" y="204" width="-1" height="-1"/>
+        <bounds x="0" y="96" height="53"/>
         <sourceConnection xsi:type="zenta:Connection" id="3f56012f" source="a4d62158" target="cfc30e7d" relationship="b6a828f0"/>
       </child>
+      <child xsi:type="zenta:DiagramObject" id="cfc30e7d" targetConnections="3f56012f" zentaElement="2ea01c4d">
+        <bounds x="0" y="0" width="122" height="53"/>
+      </child>
       <child xsi:type="zenta:DiagramObject" id="0ceb43d8" zentaElement="c09841b1">
-        <bounds x="210" y="314" width="-1" height="-1"/>
+        <bounds x="0" y="222" width="-1" height="-1"/>
         <sourceConnection xsi:type="zenta:Connection" id="1d73e720" source="0ceb43d8" target="a4d62158" relationship="cbb9c3bf"/>
       </child>
       <property key="Template"/>

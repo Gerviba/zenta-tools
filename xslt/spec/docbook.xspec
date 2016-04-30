@@ -93,9 +93,6 @@
       <x:expect label="diagram remark is the diagram documentation"
         test="//figure[title='Metamodel diagram']/remark='Metamodel diagram documentation'"/>
 
-      <x:expect label="document contains the picture of the diagram"
-        test="//figure[title='Metamodel diagram']/mediaobject/imageobject/imagedata/@fileref='pics/154fb1e4.png'"/>
-
       <x:expect label="elements follow the diagrams with element name in the term"
         test="//section[title='Metamodel']/para[2]/variablelist/varlistentry/term/text()='man'"/>
 
@@ -350,4 +347,29 @@
       		zenta:normalizeAllSpaces(//varlistentry[term/anchor/@id='minOccurs_a323c752_cbb9c3bf_2']/listitem/para[1]//text())
       	)"/>
    </x:scenario>
+   <x:scenario label="pictures have an imagemap linking to the element descriptions">
+      <x:expect label="document contains the picture of the diagram"
+        test="//figure[title='Metamodel diagram']//imagedata/@fileref='pics/154fb1e4.png'"/>
+      <x:expect label="there is an areaspec for the image"
+        test="//figure[title='Meta for same named relations']/mediaobjectco/imageobjectco/areaspec/@id='b30cea76_map'"/>
+      <x:expect label="there is an areaspec for the image"
+        test="//figure[title='Meta for same named relations']/mediaobjectco/imageobjectco/areaspec/@id='b30cea76_map'"/>
+      <x:expect label="areaspec is computed correctly"
+        test="zenta:assertEquals(
+        	'1,1,123,54',
+        	//areaspec[@id='b30cea76_map']/area[@id='cfc30e7d']/@coords
+        	)"/>
+      <x:expect label="with is computed well even if there is no width in bounds"
+        test="zenta:assertEquals(
+        	'1,97,121,150',
+        	//areaspec[@id='b30cea76_map']/area[@id='a4d62158']/@coords
+        	)"/>
+      <x:expect label="with is computed well even if width is -1"
+        test="zenta:assertEquals(
+        	'1,223,121,276',
+        	//areaspec[@id='b30cea76_map']/area[@id='0ceb43d8']/@coords
+        	)"/>
+
+   </x:scenario>
+
 </x:description>
