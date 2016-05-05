@@ -39,7 +39,8 @@
 	sed 's/MODELNAME/$(basename $@)/' <$(ZENTATOOLS)/example.check >$@
 
 %.consistencycheck: %.rich %.check
-	saxon9 -xsl:$(ZENTATOOLS)/xslt/consistencycheck.xslt -s:$(basename $@).check -o:$@ 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
+	saxon9 -xsl:$(ZENTATOOLS)/xslt/consistencycheck.xslt -s:$(basename $@).check -o:$@ >$(basename $@).consistency.stderr 2>&1 
+	sed 's/\//:/' <$(basename $@).consistency.stderr |sort --field-separator=':' --key=2
 
 %.zip: %/index.html
 	zip -ro $@ $$(basename $@ .zip)
@@ -55,7 +56,7 @@
 
 
 modelclean:
-	rm -rf *.rich *.objlist *.richescape *.docbook *.html *.pdf *.pics *.zip *.compiled
+	rm -rf *.rich *.objlist *.richescape *.docbook *.html *.pdf *.pics *.zip *.compiled *.consistency.stderr
 
 $(ZENTATOOLS)/classes: $(ZENTATOOLS)/src/net/sf/saxon/trans/RelativeUriResolver.java
 	mkdir -p $(ZENTATOOLS)/classes

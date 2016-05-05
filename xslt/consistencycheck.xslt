@@ -9,6 +9,7 @@
 
 	<xsl:param name="debug" select="'false'"/>
 <xsl:include href="functions.xslt"/>
+<xsl:include href="docbook.local.xslt"/>
 
 <xsl:function name="zenta:createElemList">
 	<xsl:param name="file"/>
