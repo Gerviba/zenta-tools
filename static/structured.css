@@ -3,6 +3,9 @@
 .emptytd {width:4px;background:#eeeeee;}
 .diagramtable {width:100%; border-width: 1px;  border-color: gray;}
 
+.fail { background:red;}
+.pass { background:green;}
+
 .term { font-weight: bold;}
 .objectClass {font-weight: normal;font-size: 50%;};
 .propertytr td {
