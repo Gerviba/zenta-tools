@@ -23,18 +23,12 @@
 		<varlistentry>
 			<term>
 				<anchor><xsl:attribute name="id" select="@errorID"/></anchor>
-				<xsl:value-of select="saxon:evaluate(
-					../../check/@errortitlestring,
-					.,
-					$doc)"/>
+				<xsl:value-of select="@errorTitle"/>
 				<ulink url="#{@errorID}">.</ulink>
 			</term>
 			<listitem>
 				<para>
-					<xsl:copy-of select="saxon:evaluate(
-						../../check/@errordescription,
-						.,
-						$doc)"/>
+					<xsl:copy-of select="errorDescription/(*|text())"/>
 				</para>
 				<xsl:copy-of select="zenta:errorIssue(.,$issues)"/>
 			</listitem>

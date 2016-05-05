@@ -39,16 +39,19 @@
 
 	<xsl:template match="/">
 		<consistencycheck>
-			<xsl:apply-templates select="//check"/>
+			<xsl:apply-templates select="//check|//globalcheck"/>
 		</consistencycheck>
 	</xsl:template>
   <xsl:template match="check">
   		<data>
   			<xsl:variable name="inmodel" select="zenta:createElemList(@modelfile,@modelnamepath,@modelbasepath,@modelvaluepath)"/>
   			<xsl:variable name="ininput" select="zenta:createElemList(@inputfile,@inputnamepath,@inputbasepath,@inputvaluepath)"/>
+  			<xsl:variable name="doc" select="document(@referencemodel)"/>
   			<xsl:variable name="inputerrorid" select="@inputerrorid"/>
   			<xsl:variable name="modelerrorid" select="@modelerrorid"/>
   			<xsl:variable name="errorURL" select="@errorURL"/>
+  			<xsl:variable name="errorTitle" select="@errortitlestring"/>
+  			<xsl:variable name="errorDescription" select="@errordescription"/>
   			<xsl:if test="$debug='true'">
 		  		<model>
 		  			<xsl:copy-of select="$inmodel"/>
@@ -66,6 +69,10 @@
 	  						<xsl:variable name="errorID" select="saxon:evaluate($modelerrorid,.)"/>
 	  						<xsl:attribute name="errorID" select="$errorID"/>
 	  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
+	  						<xsl:attribute name="errorTitle" select="saxon:evaluate($errorTitle,.,$inmodel,$ininput,$doc)"/>
+	  						<errorDescription>
+		  						<xsl:copy-of select="saxon:evaluate($errorDescription,.,$ininput,$inmodel,$doc)"/>
+	  						</errorDescription>
 	  						<xsl:copy-of select="object|value"/>
 	  					</entry>
 	  					<xsl:message>onlymodel:<xsl:value-of select="@name"/>/<xsl:value-of select="@value"/>.</xsl:message>
@@ -80,6 +87,10 @@
 	  						<xsl:variable name="errorID" select="saxon:evaluate($inputerrorid,.)"/>
 	  						<xsl:attribute name="errorID" select="$errorID"/>
 	  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
+	  						<xsl:attribute name="errorTitle" select="saxon:evaluate($errorTitle,.,$ininput,$inmodel,$doc)"/>
+	  						<errorDescription>
+		  						<xsl:copy-of select="saxon:evaluate($errorDescription,.,$ininput,$inmodel,$doc)"/>
+	  						</errorDescription>
 	  						<xsl:copy-of select="object|value"/>
 	  					</entry>
 	  					<xsl:message>onlyinput:<xsl:value-of select="@name"/>/<xsl:value-of select="@value"/>.</xsl:message>
@@ -87,6 +98,34 @@
 	  			</xsl:for-each>
 	  		</onlyinput>
   		</data>
+  </xsl:template>
+
+  <xsl:template match="globalcheck">
+  		<data>
+  			<xsl:variable name="inputfile" select="@inputfile"/>
+  			<xsl:variable name="doc" select="document(@inputfile)"/>
+  			<xsl:variable name="check" select="@check"/>
+  			<xsl:variable name="errorid" select="@errorid"/>
+  			<xsl:variable name="errorURL" select="@errorURL"/>
+  			<xsl:variable name="errorTitle" select="@errortitlestring"/>
+  			<xsl:variable name="errorDescription" select="@errordescription"/>
+	  		<xsl:copy-of select="."/>
+	  		<error>
+	  			<xsl:for-each select="$doc">
+	  				<xsl:if test="saxon:evaluate($check,$doc)">
+  						<xsl:variable name="errorID" select="saxon:evaluate($errorid,$doc)"/>
+  						<xsl:attribute name="errorID" select="$errorID"/>
+  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
+  						<xsl:variable name="errorTitle" select="saxon:evaluate($errorTitle,$doc)"/>
+  						<xsl:attribute name="errorTitle" select="$errorTitle"/>
+  						<errorDescription>
+	  						<xsl:copy-of select="saxon:evaluate($errorDescription,$doc)"/>
+  						</errorDescription>
+	  					<xsl:message><xsl:value-of select="$inputfile"/>/<xsl:value-of select="$errorTitle"/>.</xsl:message>
+	  				</xsl:if>
+	  			</xsl:for-each>
+	  		</error>
+	  	</data>
   </xsl:template>
 
 </xsl:stylesheet>

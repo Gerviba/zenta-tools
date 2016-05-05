@@ -60,4 +60,60 @@
       	)"/>
 
    </x:scenario>
+   <x:scenario label="emit error title and description in consistency checker">
+      <x:expect label="the description is generated according to errordescription in onlymodel"
+      	test="zenta:assertEquals(
+      		'model says that bob (63fb6744) raises Odette (daad56f0), but no sign of it IRL',
+      		//onlymodel/entry[@errorID='error_no_entry_irl_for_63fb6744_raises_daad56f0']/errorDescription//text()
+      	)"/>
+
+      <x:expect label="the title is generated according to errortitlestring in onlymodel"
+      	test="zenta:assertEquals(
+      		'no bob raises Odette',
+      		//onlymodel/entry[@errorID='error_no_entry_irl_for_63fb6744_raises_daad56f0']/@errorTitle
+      	)"/>
+
+      <x:expect label="the description is generated according to errordescription in onlyinput"
+      	test="zenta:assertEquals(
+      		'no trace in model for alice raising Odette',
+      		//onlyinput/entry[@errorID='error_no_entry_in_model_for_alice_raises_Odette']/errorDescription//text()
+      	)"/>
+
+      <x:expect label="the title is generated according to errortitlestring in onlyinput"
+      	test="zenta:assertEquals(
+      		'no trace in model of alice raising Odette',
+      		//onlyinput/entry[@errorID='error_no_entry_in_model_for_alice_raises_Odette']/@errorTitle
+      	)"/>
+   </x:scenario>
+   <x:scenario label="globalcheck checks on one file">
+      <x:expect label="globalcheck is in the output"
+      	test="zenta:assertEquals(
+      		'testmodel.rich',
+      		//data/globalcheck/@inputfile
+      	)"/>
+      	
+      <x:expect label="globalcheck has an associated error element"
+      	test="count(//data/globalcheck[@inputfile='testmodel.rich']/../error)=1"/>
+
+      <x:expect label="the error element have an errorID attribute"
+      	test="zenta:assertEquals(
+      	'test_error',
+      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorID)"/>
+
+      <x:expect label="the error element have an errorUrl attribute"
+      	test="zenta:assertEquals(
+      	'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt',
+      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorURL)"/>
+
+      <x:expect label="the error element have an errorTitle attribute"
+      	test="zenta:assertEquals(
+      	'no files in COMPONENT',
+      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorTitle)"/>
+
+      <x:expect label="the error element have an errorDescription tag"
+      	test="zenta:assertEquals(
+      	'instance of one kind and another instance of one kind',
+      	//data/globalcheck[@inputfile='testmodel.rich']/../error/errorDescription//text())"/>
+   	
+   </x:scenario>
 </x:description>

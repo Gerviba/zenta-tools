@@ -1,6 +1,7 @@
 <checks>
 	<check
 		title="Model Errors"
+        referencemodel="testmodel.rich"
       	modelfile="testmodel.rich"
       	modelbasepath="//error"
       	modelnamepath="@type"
@@ -12,8 +13,8 @@
       	inputvaluepath=""
         inputerrorid="$p1"
         errorURL="concat('http://example.com/model.html#',$p1)"
-        errortitlestring="zenta:modelErrorTitle($p1,$p2)"
-        errordescription="zenta:modelErrorDescription($p1,$p2)"
+        errortitlestring="zenta:modelErrorTitle($p1,$p4)"
+        errordescription="zenta:modelErrorDescription($p1,$p4)"
       	/>
     <check
         title="Discrepancies with an external source"
@@ -41,7 +42,7 @@
         "
         errordescription="if ($p1/object/man)
         then
-        	concat('no trace in model of ',$p1/@name, ' raising ', $p1/@value)
+        	concat('no trace in model for ',$p1/@name, ' raising ', $p1/@value)
         else
         	concat(
         		'model says that ',
@@ -69,4 +70,11 @@
         errortitlestring="zenta:modelErrorTitle($p1,$p2)"
         errordescription="zenta:modelErrorDescription($p1,$p2)"
       	/>
+    <globalcheck
+        inputfile="testmodel.rich" 
+        check="count(//element) > 0"
+        errorid="'test_error'"
+        errorURL="'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt'"
+        errortitlestring="'no files in COMPONENT'"
+        errordescription="string-join(//element[@xsi:type='one kind']/@name, ' and ')"/>
 </checks>

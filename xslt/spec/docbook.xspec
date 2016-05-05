@@ -264,11 +264,10 @@
       		'missing relation for bob',
       		//term[anchor/@id='minOccurs_63fb6744_87d6b2d5_1']/text()
       	)"/>
-	</x:scenario>
       <x:expect label="the description is generated according to errordescription"
       	test="zenta:assertEquals(
       		'model says that bob (63fb6744) raises Odette (daad56f0), but no sign of it IRL',
-      		//section[title/text()='Discrepancies with an external source']//varlistentry/listitem/para/text()
+      		zenta:log(//section[title/text()='Discrepancies with an external source']//varlistentry,'entry')/listitem/para/text()
       	)"/>
 
       <x:expect label="maxOccurs description is okay"
@@ -302,7 +301,8 @@
       		'No deviations in this section.',
       		//section[title='dummy empty stuff']/para
       	)"/>
-	/>
+		/>
+	</x:scenario>
 	<x:scenario label="model descriptions have links to relations">
     	<x:expect label="endpoints have links"
 	      	test="zenta:assertEquals(
