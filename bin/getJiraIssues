@@ -2,15 +2,22 @@
 
 import jira
 import sys
+from dateutil.parser import parse
+import datetime
+import time
 
 conn = jira.JIRA(dict(server=sys.argv[1], verify=False))
 
 issues = conn.search_issues(sys.argv[2])
 print "<issues>"
 for issue in issues:
-    print ' <issue id="{0}" status="{1}">'.format(
+    d = parse(issue.fields.created)
+    age = (datetime.date.fromtimestamp(time.time()) - d.date()).days
+    print ' <issue id="{0}" status="{1}" created="{2}", age="{3}">'.format(
         issue.id,
-        issue.fields.status.name.encode('utf-8'))
+        issue.fields.status.name.encode('utf-8'),
+        issue.fields.created,
+        age)
     print '  <summary>{0}</summary>'.format(
         issue.fields.summary.encode('utf-8'))
     links = conn.remote_links(issue)
