@@ -1,0 +1,18 @@
+#!/bin/bash
+ids=$(xpather "string-join(for \$i in //issue[@id='151683748']/link/@url return tokenize(\$i , '#')[2], ' ')" inputs/testmodel.issues.xml)
+
+for i in $ids
+do
+    echo "<nothing/>" >inputs/$i.coverage.report
+    echo "<nothing/>" >inputs/$i.none.report
+done
+
+rm inputs/minOccurs_6c0bace6_87d6b2d5_2.none.report
+
+cat <<EOF >inputs/minOccurs_6c0bace6_87d6b2d5_2.coverage.report
+<error errorID="testID"
+	errorURL="http://example.com/#testID"
+	errorTitle="test Title">
+	<errorDescription>no files in file list for jemalloc or file list missing</errorDescription>
+</error>
+EOF

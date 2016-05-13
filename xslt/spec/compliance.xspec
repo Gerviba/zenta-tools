@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:functx="http://www.functx.com"
+			   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			   xmlns:archimate="http://www.archimatetool.com/archimate"
+			   xmlns:zenta="http://magwas.rulez.org/zenta"
+			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+			   xmlns:saxon="http://saxon.sf.net/"
+               stylesheet="../consistencycheck.xslt">
+
+   <x:scenario label="compliance output syntax basics">
+      <x:expect label="there is a compliance group for each checks"
+      	test="zenta:assertEquals(
+      		count(document('testmodel.compliance.config')//compliancecheck),
+      		count(//compliancegroup)
+      	)"/>
+
+      <x:expect label="the compliance groups are named by the check title"
+      	test="zenta:assertEquals(
+      		'Basic compliance check test',
+      		//compliancegroup/@title
+      	)"/>
+
+      <x:expect label="the compliance groups have correct id"
+      	test="zenta:assertEquals(
+      		'by_component',
+      		//compliancegroup/@id
+      	)"/>
+
+      <x:expect label="the compliance groups have aspect_count for the count of aspects"
+      	test="zenta:assertEquals(
+      		'2',
+      		//compliancegroup[@id='by_component']/@aspect_count
+      	)"/>
+
+      <x:expect label="the compliance groups have component_count for the count of components"
+      	test="zenta:assertEquals(
+      		'7',
+      		//compliancegroup[@id='by_component']/@component_count
+      	)"/>
+
+      <x:expect label="the compliance groups have an aspect element for each aspects "
+      	test="zenta:assertEquals(
+      		2,
+      		count(//compliancegroup[@id='by_component']/aspect)
+      	)"/>
+
+      <x:expect label="the aspect elements have the name of the aspect"
+      	test="zenta:assertEquals(
+      		'coverage',
+      		//compliancegroup[@id='by_component']/aspect/@name
+      	)"/>
+
+      <x:expect label="the aspect elements have the description of the aspect"
+      	test="zenta:assertEquals(
+      		'Coverage report covers all files',
+      		//compliancegroup[@id='by_component']/aspect/description/text()
+      	)"/>
+
+      <x:expect label="each aspect have component element for each components "
+      	test="zenta:assertEquals(
+      		7,
+      		count(//compliancegroup[@id='by_component']/aspect[1]/component)
+      	)"/>
+
+      <x:expect label="the component elements have the name of the component"
+      	test="zenta:assertEquals(
+      		'minOccurs_6c0bace6_87d6b2d5_2',
+      		//compliancegroup[@id='by_component']/aspect[1]/component/@name
+      	)"/>
+
+      <x:expect label="the component elements have the description of the component"
+      	test="zenta:assertEquals(
+      		'minOccursError Alain pampers',
+      		//compliancegroup[@id='by_component']/aspect[1]/component/description/text()
+      	)"/>
+
+      <x:expect label="empty file results emptyness"
+      	test="not(exists(document('nonexistent document name')))
+      	"/>
+
+      <x:expect label="nonempty file results nonemptyness"
+      	test="exists(document('test.xslt'))
+      	"/>
+
+      <x:expect label="the component elements have the errors from the report file"
+      	test="zenta:assertEquals(
+      		'testID',
+      		//compliancegroup[@id='by_component']/aspect[@name='coverage']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/errors/error/@errorID
+      	)"/>
+
+      <x:expect label="the components with error on file fail"
+      	test="zenta:assertEquals(
+      		'false',
+      		//compliancegroup[@id='by_component']/aspect[@name='coverage']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/@passed
+      	)"/>
+
+      <x:expect label="the components with nonexisting file have an error according to that"
+      	test="zenta:assertEquals(
+      		'nonexisting_minOccurs_6c0bace6_87d6b2d5_2.none.report',
+      		//compliancegroup[@id='by_component']/aspect[@name='none']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/errors/error/@errorID
+      	)"/>
+
+      <x:expect label="the components with nonexisting file have adequate error description"
+      	test="zenta:assertEquals(
+      		'No report found for component minOccursError Alain pampers (minOccurs_6c0bace6_87d6b2d5_2), aspect Test aspect, all components should fail (none). Expected filename: inputs/minOccurs_6c0bace6_87d6b2d5_2.none.report',
+      		zenta:normalizeAllSpaces(//compliancegroup[@id='by_component']/aspect[@name='none']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/errors/error/errorDescription//text())
+      	)"/>
+
+      <x:expect label="the components with nonexisting file have adequate error title"
+      	test="zenta:assertEquals(
+      		'No report for minOccurs_6c0bace6_87d6b2d5_2/none',
+      		zenta:normalizeAllSpaces(//compliancegroup[@id='by_component']/aspect[@name='none']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/errors/error/@errorTitle)
+      	)"/>
+
+      <x:expect label="the components with nonexisting file fail"
+      	test="zenta:assertEquals(
+      		'false',
+      		//compliancegroup[@id='by_component']/aspect[@name='none']/component[@name='minOccurs_6c0bace6_87d6b2d5_2']/@passed
+      	)"/>
+
+      <x:expect label="components with existing file and no errors pass"
+      	test="zenta:assertEquals(
+      		12,
+      		count(//compliancegroup[@id='by_component']//component[@passed='true'])
+      	)"/>
+
+   </x:scenario>
+</x:description>
