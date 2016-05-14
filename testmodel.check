@@ -86,4 +86,12 @@
         errorURL="'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt'"
         errortitlestring="'no files in COMPONENT'"
         errordescription="string-join(//element[@xsi:type='one kind']/@name, ' and ')"/>
+    <globalcheck
+        id="globalcheck nofile"
+        inputfile="nonexistent file name" 
+        check="0 > count(//element)"
+        errorid="'test_error_2'"
+        errorURL="'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt'"
+        errortitlestring="'no files in COMPONENT'"
+        errordescription="string-join(//element[@xsi:type='one kind']/@name, ' and ')"/>
 </checks>

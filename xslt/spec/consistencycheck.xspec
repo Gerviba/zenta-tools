@@ -121,4 +121,27 @@
       	count(//data/globalcheck[@id='globalcheck passing']/../error))"/>
    	
    </x:scenario>
+   <x:scenario label="globalcheck fails if the file does not exist">
+         <x:expect label="there is an error if no file"
+      	test="count(//data/globalcheck[@id='globalcheck nofile']/../error)=1"/>
+
+      <x:expect label="Error for nonexisting file have an error id"
+      	test="zenta:assertEquals(
+      		'nonexisting_globalcheck nofile',
+      		//data/globalcheck[@id='globalcheck nofile']/../error/@errorID
+      	)"/>
+
+      <x:expect label="error for nonexisting file have adequate error description"
+      	test="zenta:assertEquals(
+      		'missing file: nonexistent file name',
+      		zenta:normalizeAllSpaces(//data/globalcheck[@id='globalcheck nofile']/../error/errorDescription//text())
+      	)"/>
+
+      <x:expect label="error for nonexisting file have adequate error title"
+      	test="zenta:assertEquals(
+      		'The file to check is missing in globalcheck globalcheck nofile',
+      		zenta:normalizeAllSpaces(//data/globalcheck[@id='globalcheck nofile']/../error/@errorTitle)
+      	)"/>
+   
+   </x:scenario>
 </x:description>

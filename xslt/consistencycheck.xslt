@@ -103,6 +103,7 @@
 
   <xsl:template match="globalcheck">
   		<data>
+  			<xsl:variable name="id" select="@id"/>
   			<xsl:variable name="inputfile" select="@inputfile"/>
   			<xsl:variable name="doc" select="document(@inputfile)"/>
   			<xsl:variable name="check" select="@check"/>
@@ -111,21 +112,35 @@
   			<xsl:variable name="errorTitle" select="@errortitlestring"/>
   			<xsl:variable name="errorDescription" select="@errordescription"/>
 	  		<xsl:copy-of select="."/>
-	  			<xsl:for-each select="$doc">
-	  				<xsl:if test="saxon:evaluate($check,$doc)">
-	  					<error>
-	  						<xsl:variable name="errorID" select="saxon:evaluate($errorid,$doc)"/>
-	  						<xsl:attribute name="errorID" select="$errorID"/>
-	  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
-	  						<xsl:variable name="errorTitle" select="saxon:evaluate($errorTitle,$doc)"/>
-	  						<xsl:attribute name="errorTitle" select="$errorTitle"/>
-	  						<errorDescription>
-		  						<xsl:copy-of select="saxon:evaluate($errorDescription,$doc)"/>
-	  						</errorDescription>
-		  					<xsl:message><xsl:value-of select="$inputfile"/>/<xsl:value-of select="$errorTitle"/>.</xsl:message>
-				  		</error>
-	  				</xsl:if>
-	  			</xsl:for-each>
+			<xsl:choose>
+				<xsl:when test="not(exists($doc))">
+ 					<error>
+						<xsl:attribute name="errorID" select="concat('nonexisting_',$id)"/>
+						<xsl:attribute name="errorTitle" select="concat('The file to check is missing in globalcheck ',$id)"/>
+						<errorDescription>
+							missing file: 
+							<xsl:value-of select="$inputfile"/>
+						</errorDescription>
+ 					</error>
+ 				</xsl:when>
+ 				<xsl:otherwise>
+		  			<xsl:for-each select="$doc">
+		  				<xsl:if test="saxon:evaluate($check,$doc)">
+		  					<error>
+		  						<xsl:variable name="errorID" select="saxon:evaluate($errorid,$doc)"/>
+		  						<xsl:attribute name="errorID" select="$errorID"/>
+		  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
+		  						<xsl:variable name="errorTitle" select="saxon:evaluate($errorTitle,$doc)"/>
+		  						<xsl:attribute name="errorTitle" select="$errorTitle"/>
+		  						<errorDescription>
+			  						<xsl:copy-of select="saxon:evaluate($errorDescription,$doc)"/>
+		  						</errorDescription>
+			  					<xsl:message><xsl:value-of select="$inputfile"/>/<xsl:value-of select="$errorTitle"/>.</xsl:message>
+					  		</error>
+		  				</xsl:if>
+ 						</xsl:for-each>
+ 				</xsl:otherwise>
+ 				</xsl:choose>
 	  	</data>
   </xsl:template>
 
