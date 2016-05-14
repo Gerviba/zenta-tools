@@ -78,7 +78,7 @@
       <x:expect label="entry text for failed components is fail"
       	test="zenta:assertEquals(
       		'fail',
-      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/para/text()
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/para//text()
       	)"/>
       <x:expect label="entry role for passed components is pass"
       	test="zenta:assertEquals(
@@ -92,5 +92,28 @@
       		/article/title/text()
       	)"/>
 
+   </x:scenario>
+   <x:scenario label="docbok contains description">
+      <x:expect label="entry text for failed components links to description"
+      	test="zenta:assertEquals(
+      		'none_minOccurs_6c0bace6_87d6b2d5_2',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/para/link/@linkend
+      	)"/>
+      <x:expect label="there is a varlistentry for the description"
+      	test="zenta:assertEquals(
+      		'none_minOccurs_6c0bace6_87d6b2d5_2',
+      		//variablelist/varlistentry/@id
+      	)"/>
+
+      <x:expect label="the term for the varlistentry is made from the aspect title and component description"
+      	test="zenta:assertEquals(
+      		'Failure in Test aspect, all components should fail for minOccursError Alain pampers',
+      		//variablelist/varlistentry[@id='none_minOccurs_6c0bace6_87d6b2d5_2']/term//text()
+      	)"/>
+      <x:expect label="the listitem contains the error description"
+      	test="zenta:assertEquals(
+      		'No report found for component minOccursError Alain pampers (minOccurs_6c0bace6_87d6b2d5_2), aspect Test aspect, all components should fail (none). Expected filename: inputs/minOccurs_6c0bace6_87d6b2d5_2.none.report',
+      		zenta:normalizeAllSpaces(//variablelist/varlistentry[@id='none_minOccurs_6c0bace6_87d6b2d5_2']/listitem/para//text())
+      	)"/>
    </x:scenario>
 </x:description>

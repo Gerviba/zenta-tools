@@ -8,9 +8,7 @@
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 	<xsl:param name="inconsistencyfile"/>
-	<xsl:param name="issuesfile"/>
 	<xsl:variable name="inconsistencies" select="document($inconsistencyfile)"/>
-	<xsl:variable name="issues" select="document($issuesfile)"/>
 	<xsl:variable name="doc" select="/"/>
 
 	<xsl:template match="zenta:enriched" mode="#all">

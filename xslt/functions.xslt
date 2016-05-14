@@ -4,6 +4,8 @@
 	xmlns:zenta="http://magwas.rulez.org/zenta"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+	<xsl:import href="docbook.deviations.xslt"/>
+
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 	
 	<xsl:function name="zenta:log">
@@ -423,13 +425,18 @@
     	"/>
     </xsl:function>
 
+	<xsl:function name="zenta:listIssues">
+		<xsl:param name="errissues"/>
+		<xsl:apply-templates select="$errissues" mode="deviations"/>
+	</xsl:function>
+
 	<xsl:function name="zenta:errorIssue">
 		<xsl:param name="entry"/>
 		<xsl:param name="issues"/>
 		<xsl:variable name="errissues" select="$issues//link[@url=$entry/@errorURL]/.."/>
 		<xsl:choose>
 			<xsl:when test="$errissues">
-				<xsl:apply-templates select="$errissues" mode="deviations"/>
+				<xsl:copy-of select="zenta:listIssues($errissues)"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<para>no related issues in tracker</para>

@@ -24,7 +24,9 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:attribute name="role" select="'fail'"/>
-					<para>fail</para>
+					<para>
+						<link linkend="{concat(../@name,'_',@name)}">fail</link>
+					</para>
 				</xsl:otherwise>
 			</xsl:choose>
 		</entry>
@@ -38,6 +40,21 @@
 			</entry>
 			<xsl:apply-templates select="component" mode="entry"/>
 		</row>
+	</xsl:template>
+
+	<xsl:template match="aspect" mode="failureDescription">
+		<xsl:apply-templates select="component" mode="failureDescription"/>
+	</xsl:template>
+
+	<xsl:template match="component" mode="failureDescription">
+		<varlistentry id="{concat(../@name,'_',@name)}">
+			<term>Failure in <xsl:value-of select="../description/text()"/> for <xsl:value-of select="description/text()"/></term>
+			<listitem>
+				<xsl:for-each select=".//error">
+					<para><xsl:copy-of select="errorDescription/(text()|*)"/></para>
+				</xsl:for-each>
+			</listitem>
+		</varlistentry>
 	</xsl:template>
 
 	<xsl:template match="compliancegroup">
@@ -59,6 +76,9 @@
 					</tbody>
 				</tgroup>
 			</table>
+			<variablelist>
+				<xsl:apply-templates select="aspect" mode="failureDescription"/>
+			</variablelist>
 		</section>
 	</xsl:template>
 

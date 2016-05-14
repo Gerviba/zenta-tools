@@ -8,6 +8,9 @@
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
+	<xsl:param name="issuesfile"/>
+	<xsl:variable name="issues" select="document($issuesfile)"/>
+
 	<xsl:template match="issue"	mode="deviations">
 		<para>
 			related issue:
