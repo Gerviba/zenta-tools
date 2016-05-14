@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:functx="http://www.functx.com"
+			   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			   xmlns:archimate="http://www.archimatetool.com/archimate"
+			   xmlns:zenta="http://magwas.rulez.org/zenta"
+			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+			   xmlns:saxon="http://saxon.sf.net/"
+               stylesheet="../consistencycheck.xslt">
+
+   <x:scenario label="docbook from compliance output">
+      <x:expect label="compliancegroups become sections with the title given to them"
+      	test="zenta:assertEquals(
+      		'Basic compliance check test',
+      		//section/title/text()
+      	)"/>
+      <x:expect label="section id is the compliancegroup id"
+      	test="zenta:assertEquals(
+      		'by_component',
+      		//section/@id
+      	)"/>
+      <x:expect label="section starts with a table, with the same title as the section"
+      	test="zenta:assertEquals(
+      		'Basic compliance check test',
+      		//section[@id='by_component']/table/title
+      	)"/>
+      <x:expect label="table have one more columns than the component count"
+      	test="zenta:assertEquals(
+      		'8',
+      		//section[@id='by_component']/table/tgroup/@cols
+      	)"/>
+      <x:expect label="the first column id is 'aspect'"
+      	test="zenta:assertEquals(
+      		'aspect',
+      		//section[@id='by_component']/table/tgroup/colspec[1]/@colname
+      	)"/>
+      <x:expect label="further columns ids are component names"
+      	test="zenta:assertEquals(
+      		'minOccurs_6c0bace6_87d6b2d5_2',
+      		//section[@id='by_component']/table/tgroup/colspec[2]/@colname
+      	)"/>
+      <x:expect label="the first column is 'Aspect'"
+      	test="zenta:assertEquals(
+      		'Aspect',
+      		//section[@id='by_component']/table/tgroup/thead/row/entry[1]/text()
+      	)"/>
+      <x:expect label="further columns are component names"
+      	test="zenta:assertEquals(
+      		'minOccursError Alain pampers',
+      		//section[@id='by_component']/table/tgroup/thead/row/entry[2]/text()
+      	)"/>
+      <x:expect label="rows are for aspects"
+      	test="zenta:assertEquals(
+      		'none',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/@name
+      	)"/>
+      <x:expect label="the first column in the row is aspect description"
+      	test="zenta:assertEquals(
+      		'Test aspect, all components should fail',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[1]
+      	)"/>
+      <x:expect label="other columns are for components"
+      	test="zenta:assertEquals(
+      		'minOccurs_6c0bace6_87d6b2d5_2',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/@name
+      	)"/>
+      <x:expect label="entry role for failed components is fail"
+      	test="zenta:assertEquals(
+      		'fail',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/@role
+      	)"/>
+      <x:expect label="entry role for passed components is pass"
+      	test="zenta:assertEquals(
+      		'pass',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[3]/@role
+      	)"/>
+      <x:expect label="entry text for failed components is fail"
+      	test="zenta:assertEquals(
+      		'fail',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[2]/para/text()
+      	)"/>
+      <x:expect label="entry role for passed components is pass"
+      	test="zenta:assertEquals(
+      		'pass',
+      		//section[@id='by_component']/table/tgroup/tbody/row[1]/entry[3]/para/text()
+      	)"/>
+
+      <x:expect label="top element is article, with title 'Compliance check'"
+      	test="zenta:assertEquals(
+      		'Compliance check',
+      		/article/title/text()
+      	)"/>
+
+   </x:scenario>
+</x:description>

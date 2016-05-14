@@ -267,7 +267,7 @@
       <x:expect label="the description is generated according to errordescription"
       	test="zenta:assertEquals(
       		'model says that bob (63fb6744) raises Odette (daad56f0), but no sign of it IRL',
-      		zenta:log(//section[title/text()='Discrepancies with an external source']//varlistentry,'entry')/listitem/para/text()
+      		//section[title/text()='Discrepancies with an external source']//varlistentry/listitem/para/text()
       	)"/>
 
       <x:expect label="maxOccurs description is okay"

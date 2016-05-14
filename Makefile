@@ -17,7 +17,7 @@ classes: src/net/sf/saxon/trans/RelativeUriResolver.java
 clean:
 	git clean -fdx
 
-tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test
+tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
 
 %.test: xslt/spec/%.xspec testmodel.%
 	 saxon9 -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=$$(pwd)/xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
@@ -38,3 +38,8 @@ inputs/zenta-tools.issues.xml: inputs/testmodel.issues.xml
 testmodel.compliance: testmodel.rich inputs/testmodel.issues.xml
 	bin/setupComplianceTestEnvironment
 	saxon9 -xsl:xslt/compliance.xslt -s:testmodel.compliance.config -o testmodel.compliance
+
+testmodel.compliance.docbook: testmodel.compliance
+	saxon9 -xsl:xslt/compliance.docbook.xslt -s:testmodel.compliance -o testmodel.compliance.docbook
+	touch testmodel.compliance.pics
+
