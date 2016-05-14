@@ -76,9 +76,6 @@
 					</tbody>
 				</tgroup>
 			</table>
-			<variablelist>
-				<xsl:apply-templates select="aspect" mode="failureDescription"/>
-			</variablelist>
 		</section>
 	</xsl:template>
 
@@ -86,6 +83,12 @@
 		<article>
 			<title>Compliance check</title>
 			<xsl:apply-templates select="compliancegroup"/>
+			<section>
+				<title>Failure reasons</title>
+				<variablelist>
+					<xsl:apply-templates select="//aspect" mode="failureDescription"/>
+				</variablelist>
+			</section>
 		</article>
 	</xsl:template>
 
