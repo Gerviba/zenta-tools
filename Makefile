@@ -41,5 +41,7 @@ testmodel.compliance: testmodel.rich inputs/testmodel.issues.xml
 
 testmodel.compliance.docbook: testmodel.compliance
 	saxon9 -xsl:xslt/compliance.docbook.xslt -s:testmodel.compliance -o testmodel.compliance.docbook
+
+testmodel.compliance.pics:
 	touch testmodel.compliance.pics
 

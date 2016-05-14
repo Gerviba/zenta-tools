@@ -71,9 +71,18 @@
         errordescription="zenta:modelErrorDescription($p1,$p2)"
       	/>
     <globalcheck
+        id="globalcheck failing"
         inputfile="testmodel.rich" 
         check="count(//element) > 0"
         errorid="'test_error'"
+        errorURL="'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt'"
+        errortitlestring="'no files in COMPONENT'"
+        errordescription="string-join(//element[@xsi:type='one kind']/@name, ' and ')"/>
+    <globalcheck
+        id="globalcheck passing"
+        inputfile="testmodel.rich" 
+        check="0 > count(//element)"
+        errorid="'test_error_2'"
         errorURL="'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt'"
         errortitlestring="'no files in COMPONENT'"
         errordescription="string-join(//element[@xsi:type='one kind']/@name, ' and ')"/>

@@ -93,27 +93,32 @@
       	)"/>
       	
       <x:expect label="globalcheck has an associated error element"
-      	test="count(//data/globalcheck[@inputfile='testmodel.rich']/../error)=1"/>
+      	test="count(//data/globalcheck[@id='globalcheck failing']/../error)=1"/>
 
       <x:expect label="the error element have an errorID attribute"
       	test="zenta:assertEquals(
       	'test_error',
-      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorID)"/>
+      	//data/globalcheck[@id='globalcheck failing']/../error/@errorID)"/>
 
       <x:expect label="the error element have an errorUrl attribute"
       	test="zenta:assertEquals(
       	'http://artifacts.devel.balabit/components/COMPONENT/source_files.txt',
-      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorURL)"/>
+      	//data/globalcheck[@id='globalcheck failing']/../error/@errorURL)"/>
 
       <x:expect label="the error element have an errorTitle attribute"
       	test="zenta:assertEquals(
       	'no files in COMPONENT',
-      	//data/globalcheck[@inputfile='testmodel.rich']/../error/@errorTitle)"/>
+      	//data/globalcheck[@id='globalcheck failing']/../error/@errorTitle)"/>
 
       <x:expect label="the error element have an errorDescription tag"
       	test="zenta:assertEquals(
       	'instance of one kind and another instance of one kind',
-      	//data/globalcheck[@inputfile='testmodel.rich']/../error/errorDescription//text())"/>
+      	//data/globalcheck[@id='globalcheck failing']/../error/errorDescription//text())"/>
+
+      <x:expect label="passing globalcheck have no error element"
+      	test="zenta:assertEquals(
+      	0,
+      	count(//data/globalcheck[@id='globalcheck passing']/../error))"/>
    	
    </x:scenario>
 </x:description>

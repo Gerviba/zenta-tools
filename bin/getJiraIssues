@@ -6,18 +6,23 @@ from dateutil.parser import parse
 import datetime
 import time
 
-conn = jira.JIRA(dict(server=sys.argv[1], verify=False))
+server = sys.argv[1]
+query = sys.argv[2]
 
-issues = conn.search_issues(sys.argv[2])
+conn = jira.JIRA(dict(server=server, verify=False))
+
+#https://jira.balabit/browse/DS-72
+issues = conn.search_issues(query)
 print "<issues>"
 for issue in issues:
     d = parse(issue.fields.created)
     age = (datetime.date.fromtimestamp(time.time()) - d.date()).days
-    print ' <issue id="{0}" status="{1}" created="{2}", age="{3}">'.format(
+    print ' <issue id="{0}" status="{1}" created="{2}" age="{3}" url="{4}">'.format(
         issue.id,
         issue.fields.status.name.encode('utf-8'),
         issue.fields.created,
-        age)
+        age,
+        server+"browse/"+issue.key)
     print '  <summary>{0}</summary>'.format(
         issue.fields.summary.encode('utf-8'))
     links = conn.remote_links(issue)

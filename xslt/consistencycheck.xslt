@@ -111,21 +111,21 @@
   			<xsl:variable name="errorTitle" select="@errortitlestring"/>
   			<xsl:variable name="errorDescription" select="@errordescription"/>
 	  		<xsl:copy-of select="."/>
-	  		<error>
 	  			<xsl:for-each select="$doc">
 	  				<xsl:if test="saxon:evaluate($check,$doc)">
-  						<xsl:variable name="errorID" select="saxon:evaluate($errorid,$doc)"/>
-  						<xsl:attribute name="errorID" select="$errorID"/>
-  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
-  						<xsl:variable name="errorTitle" select="saxon:evaluate($errorTitle,$doc)"/>
-  						<xsl:attribute name="errorTitle" select="$errorTitle"/>
-  						<errorDescription>
-	  						<xsl:copy-of select="saxon:evaluate($errorDescription,$doc)"/>
-  						</errorDescription>
-	  					<xsl:message><xsl:value-of select="$inputfile"/>/<xsl:value-of select="$errorTitle"/>.</xsl:message>
+	  					<error>
+	  						<xsl:variable name="errorID" select="saxon:evaluate($errorid,$doc)"/>
+	  						<xsl:attribute name="errorID" select="$errorID"/>
+	  						<xsl:attribute name="errorURL" select="saxon:evaluate($errorURL,$errorID)"/>
+	  						<xsl:variable name="errorTitle" select="saxon:evaluate($errorTitle,$doc)"/>
+	  						<xsl:attribute name="errorTitle" select="$errorTitle"/>
+	  						<errorDescription>
+		  						<xsl:copy-of select="saxon:evaluate($errorDescription,$doc)"/>
+	  						</errorDescription>
+		  					<xsl:message><xsl:value-of select="$inputfile"/>/<xsl:value-of select="$errorTitle"/>.</xsl:message>
+				  		</error>
 	  				</xsl:if>
 	  			</xsl:for-each>
-	  		</error>
 	  	</data>
   </xsl:template>
 
