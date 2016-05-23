@@ -34,7 +34,7 @@
 %.pics: %.zenta
 	rm -rf $@ pics
 	mkdir pics
-	/opt/Zenta/Zenta -data ~/.zenta -load $$(pwd)/$< -targetdir $$(pwd) -runstyle $(ZENTATOOLS)/diagrams.style -exit
+	/opt/Zenta/Zenta -data ~/.zenta -load $$(pwd)/$< -targetdir $$(pwd) -runstyle ZENTADATA/diagrams.style -exit
 	mv pics $@
 
 %.check:
@@ -49,7 +49,7 @@
 
 %.compiled: %.html %.tabled.html %.pdf %.pics %.consistencycheck
 	mkdir -p $(basename $@)
-	cp $(ZENTATOOLS)/static/structured.css $(basename $@)
+	cp ZENTADATA/structured.css $(basename $@)
 	cp $(basename $@).html $(basename $@)/index.html
 	cp $(basename $@).tabled.html $(basename $@)/tabled.html
 	cp $(basename $@).pdf $(basename $@)

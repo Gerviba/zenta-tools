@@ -11,7 +11,10 @@ zenta-tools.jar: classes
 	cp -r xslt classes
 	cd classes ; zip -ro ../zenta-tools.jar .
 
-install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather
+model.rules: model.rules.in
+	sed s,ZENTADATA,$(datadir), <$< >$@
+
+install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather model.rules
 	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
 	install zenta-tools.jar $(DESTDIR)$(jardir)
 	install bin/csv2xml $(DESTDIR)$(bindir)
@@ -21,6 +24,8 @@ install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather
 	install bin.install/xpather $(DESTDIR)$(bindir)
 	install bin/yml2xml $(DESTDIR)$(bindir)
 	install model.rules $(DESTDIR)$(datadir)
+	install static/structured.css $(DESTDIR)$(datadir)
+	install diagrams.style $(DESTDIR)$(datadir)
 
 bin.install:
 	mkdir -p bin.install
