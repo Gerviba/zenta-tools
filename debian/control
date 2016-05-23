@@ -1,0 +1,13 @@
+Source: zenta-tools
+Section: devel
+Priority: optional
+Maintainer: Árpád Magosányi <mag@magwas.rulez.org>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+Homepage: https://github.com/magwas/zenta-tools
+Vcs-Git: https://github.com/magwas/zenta-tools
+
+Package: zenta-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Documentation and consistency check framework for Zenta models
