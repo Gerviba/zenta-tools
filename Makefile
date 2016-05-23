@@ -1,6 +1,7 @@
 prefix = /usr
 bindir = $(prefix)/bin
-datadir = $(prefix)/share/
+jardir = $(prefix)/share/zenta-tools/
+datadir = $(prefix)/share/zenta-tools/
 
 all: zentaworkaround tests testmodel.compiled zenta-tools.compiled
 
@@ -10,15 +11,22 @@ zenta-tools.jar: classes
 	cp -r xslt classes
 	cd classes ; zip -ro ../zenta-tools.jar .
 
-install: zenta-tools.jar
+install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather
 	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
-	install zenta-tools.jar $(DESTDIR)$(datadir)
+	install zenta-tools.jar $(DESTDIR)$(jardir)
 	install bin/csv2xml $(DESTDIR)$(bindir)
 	install bin/getGithubIssues $(DESTDIR)$(bindir)
 	install bin/getJiraIssues $(DESTDIR)$(bindir)
-	install bin/zenta-xslt-runner $(DESTDIR)$(bindir)
-	install bin/xpather $(DESTDIR)$(bindir)
+	install bin.install/zenta-xslt-runner $(DESTDIR)$(bindir)
+	install bin.install/xpather $(DESTDIR)$(bindir)
 	install bin/yml2xml $(DESTDIR)$(bindir)
+	install model.rules $(DESTDIR)$(datadir)
+
+bin.install:
+	mkdir -p bin.install
+
+bin.install/%: bin/% bin.install
+	sed s,ZENTAJAR,$(jardir)zenta-tools.jar, <$< >$@
 
 include model.rules
 
@@ -37,10 +45,7 @@ clean:
 cleanbuild:
 	rm -rf classes zenta-tools.jar 
 
-target:
-	make DESTDIR=target install cleanbuild
-
-tests: target rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
+tests: install rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
 
 %.test: xslt/spec/%.xspec testmodel.%
 	 zenta-xslt-runner -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
