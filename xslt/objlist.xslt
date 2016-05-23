@@ -5,7 +5,7 @@
    xmlns:zenta="http://magwas.rulez.org/zenta"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<xsl:include href="functions.xslt"/>
+	<xsl:include href="xslt/functions.xslt"/>
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
 <xsl:template match="/">

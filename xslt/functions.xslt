@@ -4,7 +4,7 @@
 	xmlns:zenta="http://magwas.rulez.org/zenta"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<xsl:import href="docbook.deviations.xslt"/>
+	<xsl:import href="xslt/docbook.deviations.xslt"/>
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 	

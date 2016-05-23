@@ -1,7 +1,24 @@
+prefix = /usr
+bindir = $(prefix)/bin
+datadir = $(prefix)/share/
+
+all: zentaworkaround tests testmodel.compiled zenta-tools.compiled
 
 ZENTATOOLS=$(shell pwd)
 
-all: zentaworkaround tests testmodel.compiled zenta-tools.compiled
+zenta-tools.jar: classes
+	cp -r xslt classes
+	cd classes ; zip -ro ../zenta-tools.jar .
+
+install: zenta-tools.jar
+	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
+	install zenta-tools.jar $(DESTDIR)$(datadir)
+	install bin/csv2xml $(DESTDIR)$(bindir)
+	install bin/getGithubIssues $(DESTDIR)$(bindir)
+	install bin/getJiraIssues $(DESTDIR)$(bindir)
+	install bin/zenta-xslt-runner $(DESTDIR)$(bindir)
+	install bin/xpather $(DESTDIR)$(bindir)
+	install bin/yml2xml $(DESTDIR)$(bindir)
 
 include model.rules
 
@@ -17,13 +34,19 @@ classes: src/net/sf/saxon/trans/RelativeUriResolver.java
 clean:
 	git clean -fdx
 
-tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
+cleanbuild:
+	rm -rf classes zenta-tools.jar 
+
+target:
+	make DESTDIR=target install cleanbuild
+
+tests: target rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
 
 %.test: xslt/spec/%.xspec testmodel.%
-	 saxon9 -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=$$(pwd)/xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
+	 zenta-xslt-runner -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
 
 testmodel.consistencycheck: testmodel.check testmodel.rich testmodel.objlist
-	saxon9 -xsl:xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
+	zenta-xslt-runner -xsl:xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
 
 testenv:
 	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/edemotest:xslt /bin/bash
@@ -37,10 +60,10 @@ inputs/zenta-tools.issues.xml: inputs/testmodel.issues.xml
 
 testmodel.compliance: testmodel.rich inputs/testmodel.issues.xml
 	bin/setupComplianceTestEnvironment
-	saxon9 -xsl:xslt/compliance.xslt -s:testmodel.compliance.config -o testmodel.compliance
+	zenta-xslt-runner -xsl:xslt/compliance.xslt -s:testmodel.compliance.config -o testmodel.compliance
 
 testmodel.compliance.docbook: testmodel.compliance
-	saxon9 -xsl:xslt/compliance.docbook.xslt -s:testmodel.compliance -o testmodel.compliance.docbook
+	zenta-xslt-runner -xsl:xslt/compliance.docbook.xslt -s:testmodel.compliance -o testmodel.compliance.docbook
 
 testmodel.compliance.pics:
 	touch testmodel.compliance.pics

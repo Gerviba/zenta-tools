@@ -9,7 +9,7 @@
 
     <xsl:param name="xpath"/>
 
-<xsl:include href="functions.xslt"/>
+<xsl:include href="xslt/functions.xslt"/>
 
   <xsl:template match="/">
     <xsl:variable name="doc" select="/"/>

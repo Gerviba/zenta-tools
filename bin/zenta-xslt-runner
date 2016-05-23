@@ -1,4 +1,4 @@
 #!/bin/bash
 CLASSPATH=/usr/local/share/zenta-tools.jar:/usr/local/share/java/zenta-tools.jar:/usr/local/lib//zenta-tools.jar:/usr/share/zenta-tools.jar:/usr/share/java/zenta-tools.jar:/usr/lib/zenta-tools.jar:target/usr/share/zenta-tools.jar:/usr/share/java/tagsoup.jar:/usr/local/lib/saxon9.jar
-java -cp $CLASSPATH net.sf.saxon.Transform -r net.sf.saxon.trans.RelativeUriResolver -xsl:xslt/xpather.xslt $2 xpath="$1" 
+java -cp $CLASSPATH net.sf.saxon.Transform -r net.sf.saxon.trans.RelativeUriResolver -u ${*} targetdir=$PWD
 
