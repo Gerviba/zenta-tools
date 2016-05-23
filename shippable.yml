@@ -7,7 +7,6 @@ build:
 	ci:
 		- export DISPLAY=:99.0
 		- /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x24
-		script:
 		- echo DEBUILD_PRESERVE_ENVVARS="DISPLAY" > ~/.devscripts
 		- apt-get -y install debhelper devscripts
 		- debuild -us -uc -b
