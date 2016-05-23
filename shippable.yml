@@ -3,12 +3,14 @@ language: python
 python:
   - 2.7
 archive: true
+env:
+    global:
+      - DISPLAY=:99.0
 build:
 	ci:
-		- export DISPLAY=:99.0
-		- /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x24
-		- echo DEBUILD_PRESERVE_ENVVARS="DISPLAY" > ~/.devscripts
-		- apt-get -y install debhelper devscripts
-		- debuild -us -uc -b
+	  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x24
+	  - echo DEBUILD_PRESERVE_ENVVARS="DISPLAY" > ~/.devscripts
+	  - apt-get -y install debhelper devscripts
+	  - debuild -us -uc -b
 	on_success:
-		rsync -e "ssh -p 22022" -ar ../zenta-tools_0.1-1_amd64.deb shippable@demokracia.rulez.org:/var/www/adadocs/PDOauth
+	  - rsync -e "ssh -p 22022" -ar ../zenta-tools_0.1-1_amd64.deb shippable@demokracia.rulez.org:/var/www/adadocs/PDOauth
