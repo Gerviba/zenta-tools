@@ -1,4 +1,4 @@
 #!/bin/bash
 CLASSPATH=ZENTAJAR:/usr/share/java/tagsoup.jar:/usr/local/lib/saxon9.jar
-java -cp $CLASSPATH net.sf.saxon.Transform -r net.sf.saxon.trans.RelativeUriResolver -xsl:xslt/xpather.xslt $2 xpath="$1" 
+java -cp $CLASSPATH net.sf.saxon.Transform -u -r net.sf.saxon.trans.RelativeUriResolver -xsl:xslt/xpather.xslt $2 xpath="$1" 
 

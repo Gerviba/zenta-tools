@@ -1,0 +1,31 @@
+#!/usr/bin/python
+import json
+import sys
+
+def toXML( tag, depth=0 ):
+    ret = ""
+    if isinstance(tag,dict):
+        for aTag,value in tag.items():
+            ret += "\n{2}<{0}>{1}</{0}>{2}".format(aTag,toXML(tag[aTag], depth=depth+1), " "*depth)
+    elif isinstance(tag,list):
+        for aTag in tag:
+            ret += "\n{1}<item>{0}</item>{1}".format(toXML(aTag, depth=depth+1)," "*depth )
+    elif isinstance(tag,str) or isinstance(tag,unicode):
+        ret=tag
+    elif isinstance(tag,bool) or isinstance(tag,int):
+        ret="{0}".format(tag)
+    else:
+        raise ValueError("{0}:{1}".format(tag.__class__, tag))
+    return ret
+
+f=open(sys.argv[1])
+data=f.read()
+f.close()
+try:
+    doc = json.loads(data)
+except:
+    print "{0} is not a json file".format(sys.argv[1])
+    sys.exit(1)
+
+print toXML(dict(doc=doc))
+

@@ -23,6 +23,7 @@ install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather model
 	install bin.install/zenta-xslt-runner $(DESTDIR)$(bindir)
 	install bin.install/xpather $(DESTDIR)$(bindir)
 	install bin/yml2xml $(DESTDIR)$(bindir)
+	install bin/json2xml $(DESTDIR)$(bindir)
 	install model.rules $(DESTDIR)$(datadir)
 	install static/structured.css $(DESTDIR)$(datadir)
 	install diagrams.style $(DESTDIR)$(datadir)
