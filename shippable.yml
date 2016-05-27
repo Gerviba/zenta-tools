@@ -7,4 +7,4 @@ build:
   ci:
     - ./bin/script
   on_success:
-    - rsync -e "ssh -p 22022" -ar ../zenta-tools_0.1-1_amd64.deb shippable@demokracia.rulez.org:/var/www/adadocs/PDOauth
+    - rsync -e "ssh -p 22022" -ar ../zenta-tools_* shippable@demokracia.rulez.org:/var/www/repos/apt/debian/incoming
