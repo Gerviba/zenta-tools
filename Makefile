@@ -60,7 +60,7 @@ testmodel.consistencycheck: testmodel.check testmodel.rich testmodel.objlist
 	zenta-xslt-runner -xsl:xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
 
 testenv:
-	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/edemotest:xslt /bin/bash
+	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/zenta-tools /bin/bash
 
 inputs/testmodel.issues.xml:
 	mkdir -p inputs

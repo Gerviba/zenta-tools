@@ -34,7 +34,7 @@
 %.pics: %.zenta
 	rm -rf $@ pics
 	mkdir pics
-	/opt/Zenta/Zenta -data ~/.zenta -load $$(pwd)/$< -targetdir $$(pwd) -runstyle ZENTADATA/diagrams.style -exit
+	zenta -data ~/.zenta -load $$(pwd)/$< -targetdir $$(pwd) -runstyle ZENTADATA/diagrams.style -exit
 	mv pics $@
 
 %.check:
