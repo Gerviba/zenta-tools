@@ -1,4 +1,4 @@
-build_image: magwas/edemotest:xslt
+build_image: magwas/zenta-tools
 language: python
 python:
   - 2.7
