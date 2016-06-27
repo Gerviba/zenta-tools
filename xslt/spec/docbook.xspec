@@ -81,11 +81,11 @@
       <x:expect label="the first para of the section is the documentation for the folder"
       	test="//section[title='Metamodel']/para[1]='Metamodel documentation'"/>
 
-      <x:expect label="the second para of the section contains a variablelist if it contains anything documentable"
-      	test="count(//section[title='Metamodel']/para[2]/variablelist)=1"/>
+      <x:expect label="the third para of the section contains a variablelist if it contains anything documentable"
+      	test="count(//section[title='Metamodel']/para[3]/variablelist)=1"/>
 
-      <x:expect label="the second para of the section does not contain a variablelist if there is nothing documentable"
-      	test="count(//section[@id='emptyFolderId']/para[2]/variablelist)=0"/>
+      <x:expect label="the third para of the section does not contain a variablelist if there is nothing documentable"
+      	test="count(//section[@id='emptyFolderId']/para[3]/variablelist)=0"/>
 
       <x:expect label="if there are diagrams, the second para contain the diagrams"
       	test="//section[title='Metamodel']/para[2]//figure/title='Metamodel diagram'"/>
@@ -94,7 +94,7 @@
         test="//figure[title='Metamodel diagram']/remark='Metamodel diagram documentation'"/>
 
       <x:expect label="elements follow the diagrams with element name in the term"
-        test="//section[title='Metamodel']/para[2]/variablelist/varlistentry/term/text()='man'"/>
+        test="//section[title='Metamodel']/para[3]/variablelist/varlistentry/term/text()='man'"/>
 
       <x:expect label="element documentation is in the listitem"
         test="//section[title='Metamodel']/para/variablelist/varlistentry[term/text()='man']/listitem/para/text()=
