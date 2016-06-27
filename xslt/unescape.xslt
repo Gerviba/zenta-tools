@@ -12,6 +12,9 @@
 <a><class/><href/></a>
 <itemizedlist/>
 <listitem/>
+<variablelist/>
+<varlistentry/>
+<term/>
 <para/>
 <li/>
 <ul/>
