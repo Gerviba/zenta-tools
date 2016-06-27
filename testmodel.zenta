@@ -205,6 +205,9 @@
   </folder>
   <folder name="2. test folder" id="f2ad07d4"/>
   <folder name="1. test folder" id="0b8ec6fd">
+    <folder name="subfolder" id="8bf17b92-ac38-498b-8aa1-57376b35aa2c">
+      <element xsi:type="zenta:BasicObject" name="placeholder" id="12f97be2-6c43-4085-99ed-403e14cc8146" ancestor="basicobject"/>
+    </folder>
     <element xsi:type="zenta:ZentaDiagramModel" name="Meta for same named relations" id="b30cea76" connectionRouterType="1">
       <child xsi:type="zenta:DiagramObject" id="a4d62158" targetConnections="1d73e720" zentaElement="47abe2e9">
         <bounds x="0" y="96" height="53"/>
