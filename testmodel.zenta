@@ -31,7 +31,7 @@
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
       <documentation>a class directly descending from Basic Object
 Raises:
-&lt;xpath>string-join(zenta:neighbour(.,'raises', 1)/@name, ', ')&lt;/xpath></documentation>
+&lt;xpath>string-join(zenta:neighbour(.,.,'raises', 1)/@name, ', ')&lt;/xpath></documentation>
       <property key="fillColor"/>
       <property key="elementShape"/>
       <property key="textAlignment" value="2"/>
@@ -178,7 +178,7 @@ Raises:
     <element xsi:type="zenta:BasicObject" name="Joe" id="1e7181c1" ancestor="a63d2d0e"/>
     <element xsi:type="zenta:BasicObject" name="Odette" id="2d941c95" ancestor="8d44c0ad">
       <documentation>Raised by:
-&lt;xpath>zenta:itemizedlist_as_string(zenta:neighbour(.,'raises', 2)/@name)&lt;/xpath></documentation>
+&lt;xpath>zenta:itemizedlist_as_string(zenta:neighbour(.,.,'raises', 2)/@name)&lt;/xpath></documentation>
     </element>
     <element xsi:type="zenta:BasicRelationship" id="2411fe2d" ancestor="abe82119" source="1e7181c1" target="2d941c95">
       <documentation>This is an instance of a raises.</documentation>

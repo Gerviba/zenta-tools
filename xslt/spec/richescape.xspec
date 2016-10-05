@@ -11,14 +11,15 @@
       <x:expect label="zenta:andedlist(items) gives the list of items separated with comma and and"
    		test="zenta:assertEquals(
 	   		'Alain, Kelly and Maurice',
-	   		zenta:andedlist(zenta:neighbour(//element[@name='Jim'],'raises',1)/@name)
+	   		zenta:andedlist(zenta:neighbour(/,//element[@name='Jim'],'raises',1)/@name)
    		)" />
 
-      <x:expect label="zenta:neighbour(.,relation,direction, neighbourClass)gives the list of neighbours through the relation of that class"
+      <x:expect label="zenta:neighbour(.,.,relation,direction, neighbourClass)gives the list of neighbours through the relation of that class"
    		test="zenta:assertEquals(
 	   		'Kelly, Maurice',
-	   		string-join(zenta:neighbour(//element[@name='Jim'],'raises',1,'child')/@name,', ')
+	   		string-join(zenta:neighbour(/,//element[@name='Jim'],'raises',1,'child')/@name,', ')
    		)" />
+
       <x:expect label="zenta:itemizedlist(items) creates an itemized list from items"
    		test="zenta:assertEquals(
 	   		'Joe, mary, bob',

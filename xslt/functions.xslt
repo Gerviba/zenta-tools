@@ -445,22 +445,24 @@
 	</xsl:function>
 
 	<xsl:function name="zenta:neighbour">
+		<xsl:param name="context"/>
 		<xsl:param name="current"/>
 		<xsl:param name="relationname"/>
 		<xsl:param name="direction"/>
-		<xsl:for-each select="$current">
-			<xsl:copy-of select="//element[@id=current()/value[@ancestorName=$relationname and @direction=$direction]/@target]"/>
+		<xsl:for-each select="$context">
+			<xsl:copy-of select="//element[@id=$current/value[@ancestorName=$relationname and @direction=$direction]/@target]"/>
 		</xsl:for-each>
 	</xsl:function>
 
 	<xsl:function name="zenta:neighbour">
+		<xsl:param name="context"/>
 		<xsl:param name="current"/>
 		<xsl:param name="relationname"/>
 		<xsl:param name="direction"/>
 		<xsl:param name="targetClass"/>
-		<xsl:for-each select="$current">
+		<xsl:for-each select="$context">
 			<xsl:copy-of select="//element[
-				@id=current()/value[
+				@id=$current/value[
 					@ancestorName=$relationname and @direction=$direction
 				]/@target and
 				@xsi:type=$targetClass]"/>
