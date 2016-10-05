@@ -3,7 +3,7 @@ bindir = $(prefix)/bin
 jardir = $(prefix)/share/zenta-tools/
 datadir = $(prefix)/share/zenta-tools/
 
-all: zentaworkaround tests testmodel.compiled zenta-tools.compiled
+all: zentaworkaround tests testmodel.compiled zenta-tools.compiled misc.compiled
 
 ZENTATOOLS=$(shell pwd)
 
@@ -51,7 +51,7 @@ clean:
 cleanbuild:
 	rm -rf classes zenta-tools.jar 
 
-tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
+tests: rich.test richescape.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
 
 %.test: xslt/spec/%.xspec testmodel.%
 	 zenta-xslt-runner -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich
@@ -66,6 +66,9 @@ inputs/testmodel.issues.xml:
 	mkdir -p inputs
 	./bin/getGithubIssues https://api.github.com label:auto_inconsistency+repo:magwas/zenta-tools >inputs/testmodel.issues.xml
 
+inputs/misc.issues.xml:
+	mkdir -p inputs
+	echo '<none/>' >inputs/misc.issues.xml
 inputs/zenta-tools.issues.xml: inputs/testmodel.issues.xml
 	cp inputs/testmodel.issues.xml inputs/zenta-tools.issues.xml
 

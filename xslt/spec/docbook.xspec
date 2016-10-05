@@ -27,7 +27,7 @@
 		<x:expect label="if no backward relation name is defined, 'is Xed by' used"
 	     	test="zenta:assertEquals(
 	     		'Odette is raised by bob',
-	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='Odette']/listitem//listitem[3]//text())
+	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='Odette']/listitem/para[3]//listitem[3])
 	     		)
 	     		"/>
 		<x:expect label="if the character before the last is not vovel, then an e is inserted"
@@ -97,9 +97,12 @@
         test="//section[title='Metamodel']/para[3]/variablelist/varlistentry/term/text()='man'"/>
 
       <x:expect label="element documentation is in the listitem"
-        test="//section[title='Metamodel']/para/variablelist/varlistentry[term/text()='man']/listitem/para/text()=
-        'a class directly descending from Basic Object'"/>
-
+         test="zenta:assertEquals(
+	   		zenta:normalizeAllSpaces(
+	   			//section[title='Metamodel']/para/variablelist/varlistentry[term/text()='man']/listitem/para/text()),
+	   		'A man is a Basic Object. a class directly descending from Basic Object Raises: grandchild connections:'
+   		)" />
+      
       <x:expect label="named connections are documented with name in the term"
       	test="//varlistentry/term/text()='pampers'"/>
 
@@ -189,7 +192,7 @@
 	<x:scenario label="maxOccurs documentation">
 		<x:expect label="if maxOccurs != 0, then listitem denotes it"
 	     	test="zenta:assertEquals(
-	     		'man points to at most 1 target',
+	     		'man points to at least 1 and at most 1 target',
 	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='man']/listitem/para/itemizedlist/listitem[3]//text())
 	     		)
 	     		"/>

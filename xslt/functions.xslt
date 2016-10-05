@@ -444,5 +444,54 @@
 		</xsl:choose>
 	</xsl:function>
 
+	<xsl:function name="zenta:neighbour">
+		<xsl:param name="current"/>
+		<xsl:param name="relationname"/>
+		<xsl:param name="direction"/>
+		<xsl:for-each select="$current">
+			<xsl:copy-of select="//element[@id=current()/value[@ancestorName=$relationname and @direction=$direction]/@target]"/>
+		</xsl:for-each>
+	</xsl:function>
+
+	<xsl:function name="zenta:neighbour">
+		<xsl:param name="current"/>
+		<xsl:param name="relationname"/>
+		<xsl:param name="direction"/>
+		<xsl:param name="targetClass"/>
+		<xsl:for-each select="$current">
+			<xsl:copy-of select="//element[
+				@id=current()/value[
+					@ancestorName=$relationname and @direction=$direction
+				]/@target and
+				@xsi:type=$targetClass]"/>
+		</xsl:for-each>
+	</xsl:function>
+
+	<xsl:function name="zenta:itemizedlist_as_string">
+		<xsl:param name="items"/>
+		<itemizedlist>
+			<xsl:for-each select="$items">
+				<listitem>
+					<xsl:value-of select="."/>
+				</listitem>
+			</xsl:for-each>
+		</itemizedlist>
+	</xsl:function>
+
+	<xsl:function name="zenta:itemizedlist">
+		<xsl:param name="items"/>
+		<itemizedlist>
+			<xsl:for-each select="$items">
+				<listitem>
+					<xsl:copy-of select="."/>
+				</listitem>
+			</xsl:for-each>
+		</itemizedlist>
+	</xsl:function>
+
+	<xsl:function name="zenta:andedlist">
+		<xsl:param name="items"/>
+		<xsl:copy-of select="concat(string-join(subsequence($items,1,count($items)-1),', '), ' and ', $items[count($items)])"/>
+	</xsl:function>
 
 </xsl:stylesheet>
