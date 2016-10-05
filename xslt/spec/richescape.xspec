@@ -8,6 +8,46 @@
 			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                stylesheet="../enrich.xslt">
 
+      <x:expect label="zenta:andedlist(items) gives the list of items separated with comma and and"
+   		test="zenta:assertEquals(
+	   		'Alain, Kelly and Maurice',
+	   		zenta:andedlist(zenta:neighbour(//element[@name='Jim'],'raises',1)/@name)
+   		)" />
+
+      <x:expect label="zenta:neighbour(.,relation,direction, neighbourClass)gives the list of neighbours through the relation of that class"
+   		test="zenta:assertEquals(
+	   		'Kelly, Maurice',
+	   		string-join(zenta:neighbour(//element[@name='Jim'],'raises',1,'child')/@name,', ')
+   		)" />
+      <x:expect label="zenta:itemizedlist(items) creates an itemized list from items"
+   		test="zenta:assertEquals(
+	   		'Joe, mary, bob',
+	   		string-join(zenta:itemizedlist(//element[@name='Odette']/value/@name)/listitem/@name,', ')
+   		)" />
+      <x:expect label="zenta:itemizedlist_as_string(items) creates an itemized list from items"
+   		test="zenta:assertEquals(
+	   		'Joe, mary, bob',
+	   		string-join(//element[@name='Odette']/documentation/itemizedlist/listitem,', ')
+   		)" />
+
+      <x:expect label="zenta:neighbour(.,relation,direction) gives the list of neighbours through the relation"
+   		test="zenta:assertEquals(
+	   		'a class directly descending from Basic Object Raises: Odette, Kelly',
+	   		zenta:normalizeAllSpaces(//element[@name='bob']/documentation)
+   		)" />
+
+      <x:expect label="elements with no documentation get the documentation of the parent"
+   		test="zenta:assertEquals(
+	   		'42',
+	   		//element[@name='Alain']/documentation
+   		)" />
+
+      <x:expect label="xpath in xpath tags in documentation get executed"
+   		test="zenta:assertEquals(
+	   		'42',
+	   		//element[@name='grandchild']/documentation
+   		)" />
+
    <x:scenario label="changetype mode changes element types">
       <x:expect label="The root object remains zenta:BasicObject"
       	test="//element[@id='basicobject']/@xsi:type = 'zenta:BasicObject'"/>
@@ -253,4 +293,5 @@
       <x:expect label="minOccurs=-1 is treated as infinity"
       	test="count(//element[@name='Kelly']/error[@type='minOccursError' and @name='raises'])=0"/>
       	
+
 </x:description>

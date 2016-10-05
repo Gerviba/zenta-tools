@@ -51,7 +51,7 @@ clean:
 cleanbuild:
 	rm -rf classes zenta-tools.jar 
 
-tests: rich.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
+tests: rich.test richescape.test docbook.test objlist.test consistencycheck.test tabled.docbook.test compliance.test compliance.docbook.test testmodel.compliance.pdf
 
 %.test: xslt/spec/%.xspec testmodel.%
 	 zenta-xslt-runner -l -xsl:xslt/tester/test.xslt -s:testmodel.$(basename $@) tests=xslt/spec/$(basename $@).xspec sources=../../testmodel.zenta,../../testmodel.rich

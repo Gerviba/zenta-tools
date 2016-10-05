@@ -44,8 +44,11 @@
 
       <x:expect label="element documentation is in the documentation cell"
         test="zenta:assertEquals(
-        	//section[title='Metamodel']/table/tgroup/tbody/row[entry[@class='starter']/text()='man']/entry[@class='documentation']/para/text(),
-        	'a class directly descending from Basic Object')"/>
+	   		zenta:normalizeAllSpaces(
+	        	//section[title='Metamodel']/table/tgroup/tbody/row[entry[@class='starter']/text()='man']/entry[@class='documentation']/para/text()
+	        ),
+	   		'A man is a Basic Object. a class directly descending from Basic Object Raises: grandchild connections:'
+   		)" />
 
       <x:expect label="named connections are documented"
       	test="zenta:assertEquals(//row/entry[@class='starter']/text(),'pampers')"/>

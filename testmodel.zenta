@@ -26,13 +26,12 @@
       <property key="Template"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="Basic Object" id="basicobject"/>
-    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject">
-      <property key="minOccurs" value="-1/-1"/>
-      <property key="maxOccurs" value="-1/-1"/>
-    </element>
+    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject"/>
     <element xsi:type="zenta:ZentaDiagramModel" name="Default View" id="3bd9d9b9"/>
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
-      <documentation>a class directly descending from Basic Object</documentation>
+      <documentation>a class directly descending from Basic Object
+Raises:
+&lt;xpath>string-join(zenta:neighbour(.,'raises', 1)/@name, ', ')&lt;/xpath></documentation>
       <property key="fillColor"/>
       <property key="elementShape"/>
       <property key="textAlignment" value="2"/>
@@ -58,6 +57,7 @@
       <property key="maxOccurs" value="2/1"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="grandchild" id="a93354a0" ancestor="8d44c0ad">
+      <documentation>&lt;xpath>41+1&lt;/xpath></documentation>
       <property key="fillColor"/>
       <property key="elementShape"/>
       <property key="textAlignment" value="2"/>
@@ -171,10 +171,15 @@
       <child xsi:type="zenta:DiagramObject" id="b9167b9b" targetConnections="971e4b2f" zentaElement="999327b8">
         <bounds x="1003" y="410" width="-1" height="-1"/>
       </child>
+      <property key="minOccurs" value="-1/-1"/>
+      <property key="maxOccurs" value="-1/-1"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="knife" id="f08125b1" ancestor="basicobject"/>
     <element xsi:type="zenta:BasicObject" name="Joe" id="1e7181c1" ancestor="a63d2d0e"/>
-    <element xsi:type="zenta:BasicObject" name="Odette" id="2d941c95" ancestor="8d44c0ad"/>
+    <element xsi:type="zenta:BasicObject" name="Odette" id="2d941c95" ancestor="8d44c0ad">
+      <documentation>Raised by:
+&lt;xpath>zenta:itemizedlist_as_string(zenta:neighbour(.,'raises', 2)/@name)&lt;/xpath></documentation>
+    </element>
     <element xsi:type="zenta:BasicRelationship" id="2411fe2d" ancestor="abe82119" source="1e7181c1" target="2d941c95">
       <documentation>This is an instance of a raises.</documentation>
     </element>
