@@ -12,7 +12,6 @@ public class XPathFunctions {
 		str = str.replaceAll("&gt;", ">");
 		str = str.replaceAll("&quot;", "\"");
 		str = "<root>"+str+"</root>";
-		System.out.println(str);
 		return new StreamSource(new StringReader(str));
 	}
 
