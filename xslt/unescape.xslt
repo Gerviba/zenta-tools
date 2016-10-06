@@ -76,10 +76,7 @@
 
 <xsl:template match="documentation|purpose" mode="unescape">
 	<xsl:copy>
-		<xsl:message>before</xsl:message>
-		<xsl:message select="."/>
 		<xsl:copy-of select="zentatools:unescape(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
-		<xsl:message>after</xsl:message>
 	</xsl:copy>
 </xsl:template>
 
