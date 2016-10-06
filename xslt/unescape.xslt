@@ -5,6 +5,7 @@
 	xmlns:structured="http://magwas.rulez.org/my"
 	xmlns:zenta="http://magwas.rulez.org/zenta"
 	xmlns:saxon="http://saxon.sf.net/"
+	xmlns:zentatools="java:org.rulez.magwas.zentatools.XPathFunctions"
 >
 <xsl:param name="escapemode">unescape</xsl:param>
 
@@ -74,70 +75,9 @@
 </xsl:template>
 
 <xsl:template match="documentation|purpose" mode="unescape">
-	<xsl:variable name="escaped">
-		<xsl:apply-templates select="*|@*|text()|processing-instruction()|comment()" mode="escapetag"/>
-	</xsl:variable>
-	<xsl:element name="{local-name()}">
-	<xsl:call-template name="doc">
-		<xsl:with-param name="str">
-			<xsl:value-of select="$escaped"/>
-		</xsl:with-param>
-	</xsl:call-template>
-	</xsl:element>
-</xsl:template>
-
-<xsl:template name="doc">
-	<xsl:param name="str"/>
-	<xsl:param name="level">0</xsl:param>
-	<xsl:variable name="start" select="fn:substring-before($str,'&lt;')"/>
-	<xsl:variable name="rest" select="fn:substring-after($str,'&lt;')"/>
-	<xsl:variable name="fulltag" select="fn:substring-before($rest,'&gt;')"/>
-	<xsl:variable name="tagparts" select="fn:tokenize($fulltag,'[  &#xA;]')"/>
-	<xsl:variable name="ptag" select="$tagparts[1]"/>
-	<xsl:variable name="tag" select="fn:replace($ptag,'^(.[^/]*)[/]*$','$1')"/>
-	<xsl:variable name="aftertag" select="fn:substring-after($rest,'&gt;')"/>
-	<xsl:variable name="intag" select="fn:substring-before($aftertag,fn:concat(fn:concat('&lt;/',$tag),'&gt;'))"/>
-	<xsl:variable name="afterall" select="fn:substring-after($aftertag,fn:concat(fn:concat('&lt;/',$tag),'&gt;'))"/>
-	<xsl:value-of select="$start"/>
-	<xsl:choose>
-	<xsl:when test="$tag">
-		<xsl:variable name="currtag" select="$allowedtags/*[$tag = local-name()]"/>
-		<xsl:if test="$currtag">
-			<xsl:element name="{$currtag/local-name()}">
-				<xsl:for-each select="$tagparts[position()>1]">
-					<xsl:variable name="anstring" select="fn:replace(.,'^([^ &#xA;=]*)=.*$','$1')"/>
-					<xsl:variable name="antag" select="$currtag/*[$anstring = local-name()]"/>
-					<xsl:if test="$antag">
-						<xsl:variable name="tagval" select="fn:replace(.,'^.*[^&#34;'']*[&#34;'']([^&#34;'']*)[&#34;''].*','$1')"/>
-						<xsl:attribute name="{$antag/local-name()}">
-							<xsl:value-of select="string($tagval)"/>
-						</xsl:attribute>
-					</xsl:if>
-				</xsl:for-each>
-				<xsl:if test="$intag">
-					<xsl:call-template name="doc">
-						<xsl:with-param name="str">
-							<xsl:value-of select="$intag"/>
-						</xsl:with-param>
-					</xsl:call-template>
-				</xsl:if>
-			</xsl:element>
-		</xsl:if>
-		<xsl:if test="$afterall">
-			<xsl:call-template name="doc">
-				<xsl:with-param name="str">
-					<xsl:value-of select="$afterall"/>
-				</xsl:with-param>
-				<xsl:with-param name="level">
-					<xsl:value-of select="$level + 1"/>
-				</xsl:with-param>
-			</xsl:call-template>
-		</xsl:if>
-	</xsl:when>
-	<xsl:otherwise>
-					<xsl:value-of select="$str"/>
-	</xsl:otherwise>
-	</xsl:choose>
+	<xsl:copy>
+		<xsl:copy-of select="zentatools:unescape(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
+	</xsl:copy>
 </xsl:template>
 
 

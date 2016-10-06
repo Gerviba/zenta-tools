@@ -44,6 +44,7 @@ zentaworkaround:
 classes: src/net/sf/saxon/trans/RelativeUriResolver.java
 	mkdir -p classes
 	javac -cp /usr/local/lib/saxon9.jar -d classes src/net/sf/saxon/trans/RelativeUriResolver.java
+	javac -cp /usr/local/lib/saxon9.jar -d classes src/org/rulez/magwas/zentatools/XPathFunctions.java
 
 clean:
 	git clean -fdx

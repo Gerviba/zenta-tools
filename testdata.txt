@@ -1,0 +1,22 @@
+<documentation>A comment can use &lt;b>bold&lt;/b>, &lt;i>italic&lt;/i>, &lt;u>underline&lt;/u> and &lt;del>deleted&lt;/del>.
+We can add any formatting with &lt;a class=&quot;aclass&quot;>classes&lt;/a>, and embed urls &lt;a href=&quot;http://example.href/url&quot;>the html way&lt;/a>.
+You can use
+&lt;itemizedlist>
+ &lt;listitem>itemized lists&lt;/listitem>
+&lt;/itemizedlist>
+And
+&lt;variablelist>
+ &lt;varlistentry>&lt;term>variable lists&lt;/term>
+  &lt;listitem>
+   &lt;para>For title and descriptions.&lt;/para>
+  &lt;/listitem>
+ &lt;/varlistentry>
+&lt;/variablelist>
+&lt;para>You can use breaks&lt;br>&lt;/br>but have to write out both the start and the end tag.&lt;/para>
+&lt;itemizedlist>
+ &lt;listitem>
+  &lt;itemizedlist>
+   &lt;listitem>embedded lists&lt;/listitem>
+  &lt;/itemizedlist>
+ &lt;/listitem>
+&lt;/itemizedlist></documentation>

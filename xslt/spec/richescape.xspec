@@ -8,17 +8,106 @@
 			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                stylesheet="../enrich.xslt">
 
+      <x:expect label="b tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'bold',
+	   		//element[@name='mary']/documentation/b
+   		)" />
+
+      <x:expect label="i tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'italic',
+	   		//element[@name='mary']/documentation/i
+   		)" />
+      <x:expect label="u tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'underline',
+	   		//element[@name='mary']/documentation/u
+   		)" />
+      <x:expect label="del tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'deleted',
+	   		//element[@name='mary']/documentation/del
+   		)" />
+
+      <x:expect label="a tags can be used in comment with class"
+   		test="zenta:assertEquals(
+	   		'aclass',
+	   		//element[@name='mary']/documentation/a/@class
+   		)" />
+
+      <x:expect label="a tags can be used in comment with href"
+   		test="zenta:assertEquals(
+	   		'http://example.href/url',
+	   		//element[@name='mary']/documentation/a/@href
+   		)" />
+
+      <x:expect label="itemizedlist tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'listitem',
+	   		//element[@name='mary']/documentation/itemizedlist/*[1]/name()
+   		)" />
+      <x:expect label="listitem tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'itemized lists',
+	   		//element[@name='mary']/documentation/itemizedlist/listitem[1]
+   		)" />
+      <x:expect label="variablelist tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'varlistentry',
+	   		//element[@name='mary']/documentation/variablelist/*[1]/name()
+   		)" />
+      <x:expect label="varlistentry tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'term',
+	   		//element[@name='mary']/documentation//varlistentry/*[1]/name()
+   		)" />
+      <x:expect label="term tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'variable lists',
+	   		//element[@name='mary']/documentation//term
+   		)" />
+      <x:expect label="para tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'For title and descriptions.',
+	   		//element[@name='mary']/documentation//para
+   		)" />
+      <x:expect label="br tags can be used in comment"
+   		test="zenta:assertEquals(
+	   		'but have to write out both the start and the end tag.',
+	   		//element[@name='mary']/documentation//text()[preceding-sibling::br]
+   		)" />
+
+      <x:expect label="embedding is possible with the same tags"
+   		test="zenta:assertEquals(
+	   		'embedded lists',
+	   		//element[@name='mary']/documentation/itemizedlist/listitem/itemizedlist/listitem
+   		)" />
+   		
+      <x:expect label="zenta:andedlist(items) does not use and if there is one item"
+   		test="zenta:assertEquals(
+	   		'Alain',
+	   		zenta:andedlist(zenta:neighbour(/,//element[@name='bob'],'pampers',1)/@name)
+   		)" />
+
+      <x:expect label="zenta:andedlist(items) returns empty string if there is no item"
+   		test="zenta:assertEquals(
+	   		'',
+	   		zenta:andedlist(zenta:neighbour(/,//element[@name='bob'],'pampers',0)/@name)
+   		)" />
+   		
       <x:expect label="zenta:andedlist(items) gives the list of items separated with comma and and"
    		test="zenta:assertEquals(
 	   		'Alain, Kelly and Maurice',
-	   		zenta:andedlist(zenta:neighbour(//element[@name='Jim'],'raises',1)/@name)
+	   		zenta:andedlist(zenta:neighbour(/,//element[@name='Jim'],'raises',1)/@name)
    		)" />
 
-      <x:expect label="zenta:neighbour(.,relation,direction, neighbourClass)gives the list of neighbours through the relation of that class"
+      <x:expect label="zenta:neighbour(.,.,relation,direction, neighbourClass)gives the list of neighbours through the relation of that class"
    		test="zenta:assertEquals(
 	   		'Kelly, Maurice',
-	   		string-join(zenta:neighbour(//element[@name='Jim'],'raises',1,'child')/@name,', ')
+	   		string-join(zenta:neighbour(/,//element[@name='Jim'],'raises',1,'child')/@name,', ')
    		)" />
+
       <x:expect label="zenta:itemizedlist(items) creates an itemized list from items"
    		test="zenta:assertEquals(
 	   		'Joe, mary, bob',

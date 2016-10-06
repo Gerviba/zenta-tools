@@ -31,7 +31,7 @@
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
       <documentation>a class directly descending from Basic Object
 Raises:
-&lt;xpath>string-join(zenta:neighbour(.,'raises', 1)/@name, ', ')&lt;/xpath></documentation>
+&lt;xpath>string-join(zenta:neighbour(.,.,'raises', 1)/@name, ', ')&lt;/xpath></documentation>
       <property key="fillColor"/>
       <property key="elementShape"/>
       <property key="textAlignment" value="2"/>
@@ -178,12 +178,35 @@ Raises:
     <element xsi:type="zenta:BasicObject" name="Joe" id="1e7181c1" ancestor="a63d2d0e"/>
     <element xsi:type="zenta:BasicObject" name="Odette" id="2d941c95" ancestor="8d44c0ad">
       <documentation>Raised by:
-&lt;xpath>zenta:itemizedlist_as_string(zenta:neighbour(.,'raises', 2)/@name)&lt;/xpath></documentation>
+&lt;xpath>zenta:itemizedlist_as_string(zenta:neighbour(.,.,'raises', 2)/@name)&lt;/xpath></documentation>
     </element>
     <element xsi:type="zenta:BasicRelationship" id="2411fe2d" ancestor="abe82119" source="1e7181c1" target="2d941c95">
       <documentation>This is an instance of a raises.</documentation>
     </element>
-    <element xsi:type="zenta:BasicObject" name="mary" id="2c206781" ancestor="a63d2d0e"/>
+    <element xsi:type="zenta:BasicObject" name="mary" id="2c206781" ancestor="a63d2d0e">
+      <documentation>A comment can use &lt;b>bold&lt;/b>, &lt;i>italic&lt;/i>, &lt;u>underline&lt;/u> and &lt;del>deleted&lt;/del>.
+We can add any formatting with &lt;a class=&quot;aclass&quot;>classes&lt;/a>, and embed urls &lt;a href=&quot;http://example.href/url&quot;>the html way&lt;/a>.
+You can use
+&lt;itemizedlist>
+ &lt;listitem>itemized lists&lt;/listitem>
+&lt;/itemizedlist>
+And
+&lt;variablelist>
+ &lt;varlistentry>&lt;term>variable lists&lt;/term>
+  &lt;listitem>
+   &lt;para>For title and descriptions.&lt;/para>
+  &lt;/listitem>
+ &lt;/varlistentry>
+&lt;/variablelist>
+&lt;para>You can use breaks&lt;br>&lt;/br>but have to write out both the start and the end tag.&lt;/para>
+&lt;itemizedlist>
+ &lt;listitem>
+  &lt;itemizedlist>
+   &lt;listitem>embedded lists&lt;/listitem>
+  &lt;/itemizedlist>
+ &lt;/listitem>
+&lt;/itemizedlist></documentation>
+    </element>
     <element xsi:type="zenta:BasicObject" name="bob" id="63fb6744" ancestor="a63d2d0e"/>
     <element xsi:type="zenta:BasicRelationship" id="fb6b6962" ancestor="abe82119" source="2c206781" target="2d941c95"/>
     <element xsi:type="zenta:BasicRelationship" id="daad56f0" ancestor="abe82119" source="63fb6744" target="2d941c95"/>
