@@ -5,6 +5,7 @@
 	xmlns:structured="http://magwas.rulez.org/my"
 	xmlns:zenta="http://magwas.rulez.org/zenta"
 	xmlns:saxon="http://saxon.sf.net/"
+	xmlns:zentatools="java:org.rulez.magwas.zentatools.XPathFunctions"
 >
 <xsl:param name="escapemode">unescape</xsl:param>
 
@@ -74,6 +75,14 @@
 </xsl:template>
 
 <xsl:template match="documentation|purpose" mode="unescape">
+	<xsl:copy>
+		<xsl:message>before</xsl:message>
+		<xsl:message select="."/>
+		<xsl:copy-of select="zentatools:unescape(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
+		<xsl:message>after</xsl:message>
+	</xsl:copy>
+</xsl:template>
+<!-- xsl:template match="documentation|purpose" mode="unescape">
 	<xsl:variable name="escaped">
 		<xsl:apply-templates select="*|@*|text()|processing-instruction()|comment()" mode="escapetag"/>
 	</xsl:variable>
@@ -84,7 +93,7 @@
 		</xsl:with-param>
 	</xsl:call-template>
 	</xsl:element>
-</xsl:template>
+</xsl:template-->
 
 <xsl:template name="doc">
 	<xsl:param name="str"/>

@@ -493,7 +493,14 @@
 
 	<xsl:function name="zenta:andedlist">
 		<xsl:param name="items"/>
-		<xsl:copy-of select="concat(string-join(subsequence($items,1,count($items)-1),', '), ' and ', $items[count($items)])"/>
+		<xsl:choose>
+			<xsl:when test="count($items) &lt; 2">
+				<xsl:value-of select="string($items)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="concat(string-join(subsequence($items,1,count($items)-1),', '), ' and ', $items[count($items)])"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 
 </xsl:stylesheet>
