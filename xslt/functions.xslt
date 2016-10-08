@@ -503,4 +503,34 @@
 		</xsl:choose>
 	</xsl:function>
 
+    <xsl:function name="zenta:neighboursOnPath">
+        <xsl:param name="context"/>
+        <xsl:param name="current"/>
+        <xsl:param name="pathstring"/>
+        <xsl:variable name="path" select="tokenize($pathstring,';')"/>
+        <xsl:variable name="next" select="$path[1]"/>
+        <xsl:variable name="rest" select="subsequence($path,2,count($path))"/>
+        <xsl:variable name="nextsequence" select="tokenize($next,',')"/>
+     	<xsl:variable name="neighbours" select="
+     		if (count($nextsequence)>2) then
+     			zenta:neighbour($context,$current,$nextsequence[1],$nextsequence[2],$nextsequence[3])
+     		else
+     			zenta:neighbour($context,$current,$nextsequence[1],$nextsequence[2])
+     	"/>
+        <xsl:choose>
+        	<xsl:when test="$rest">
+        		<xsl:for-each select="$neighbours">
+	        		<xsl:copy-of select="
+	        			zenta:neighboursOnPath(
+	        				$context,
+	        				.,
+	        				$rest)"/>
+        		</xsl:for-each>
+        	</xsl:when>
+        	<xsl:otherwise>
+        		<xsl:copy-of select="$neighbours"/>
+        	</xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
 </xsl:stylesheet>
