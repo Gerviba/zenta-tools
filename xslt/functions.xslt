@@ -6,6 +6,8 @@
 
 	<xsl:import href="xslt/docbook.deviations.xslt"/>
 
+	<xsl:import href="functions.local.xslt"/>
+
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 	
 	<xsl:function name="zenta:log">
