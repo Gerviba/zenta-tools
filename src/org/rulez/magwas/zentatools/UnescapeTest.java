@@ -27,7 +27,7 @@ public class UnescapeTest {
 			}
 
 	@Test
-	public void testUnescape() throws IOException, XPathExpressionException, ParserConfigurationException, SAXException{
+	public void testUnescape() throws Exception{
 		String testString = readFile("testdata.txt");
 		
 		StreamSource foo = (StreamSource) XPathFunctions.unescape(testString);
@@ -36,7 +36,22 @@ public class UnescapeTest {
 		String baz = evaluateXpathOnSource(foo, xpathExpression);
 		assertEquals("embedded lists",baz);
 	}
+	
+	@Test
+	public void testUnescapeBadformatting() {
+		String testString = "some </bad> markup";
+		
+		try {
+			XPathFunctions.unescape(testString);
+		} catch (Exception e) {
+			assertTrue(e instanceof UnescapeException);
+			assertEquals(e.getMessage(), "Bad xml: <root>some </bad> markup</root>");
+			return;
+		}
+		fail();
+	}
 
+	
 	private String evaluateXpathOnSource(StreamSource foo, String xpathExpression) throws XPathExpressionException {
 		XPathExpression expr = compileXpath(xpathExpression);
 		InputSource bar = new InputSource( foo.getReader());

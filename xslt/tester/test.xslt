@@ -5,6 +5,7 @@
    xmlns:zenta="http://magwas.rulez.org/zenta"
    xmlns:x="http://www.jenitennison.com/xslt/xspec"
    xmlns:saxon="http://saxon.sf.net/"
+   xmlns:zentatools="java:org.rulez.magwas.zentatools.XPathFunctions"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:include href="../functions.xslt"/>
