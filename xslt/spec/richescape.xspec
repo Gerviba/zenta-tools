@@ -8,6 +8,9 @@
 			   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                stylesheet="../enrich.xslt">
 
+      <x:expect label="unescape throws xception for bad markup"
+   		test="'would test it with zentatools:unescape(bad &lt;/markup>) if we had exceptions in xslt'" />
+
       <x:expect label="b tags can be used in comment"
    		test="zenta:assertEquals(
 	   		'bold',

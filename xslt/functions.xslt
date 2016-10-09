@@ -2,6 +2,7 @@
 <xsl:stylesheet version="2.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:zenta="http://magwas.rulez.org/zenta"
+	xmlns:zentatools="java:org.rulez.magwas.zentatools.XPathFunctions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<xsl:import href="xslt/docbook.deviations.xslt"/>
