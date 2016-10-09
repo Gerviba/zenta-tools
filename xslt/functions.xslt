@@ -473,6 +473,7 @@
 
 	<xsl:function name="zenta:itemizedlist_as_string">
 		<xsl:param name="items"/>
+        <xsl:variable name="contents">
 		<itemizedlist>
 			<xsl:for-each select="$items">
 				<listitem>
@@ -480,10 +481,13 @@
 				</listitem>
 			</xsl:for-each>
 		</itemizedlist>
+        </xsl:variable>
+        <xsl:copy-of select="if ($contents//listitem) then $contents else '(none)'"/>
 	</xsl:function>
 
 	<xsl:function name="zenta:itemizedlist">
 		<xsl:param name="items"/>
+        <xsl:variable name="contents">
 		<itemizedlist>
 			<xsl:for-each select="$items">
 				<listitem>
@@ -491,6 +495,8 @@
 				</listitem>
 			</xsl:for-each>
 		</itemizedlist>
+        </xsl:variable>
+        <xsl:copy-of select="if ($contents//listitem) then $contents else '(none)'"/>
 	</xsl:function>
 
 	<xsl:function name="zenta:andedlist">
