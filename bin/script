@@ -7,7 +7,8 @@ apt-get -y install debhelper devscripts
 make install
 make clean
 git checkout -b build
-dch --force-distribution -D $BRANCH -v 0.1-1.$BRANCH.$BUILD_NUMBER commit $(git rev-parse HEAD)
+normalized_branch=$(echo $BRANCH|sed 'sA[/_]A.Ag')
+dch --force-distribution -D $normalized_branch -v 0.1-1.$normalized_branch.$BUILD_NUMBER commit $(git rev-parse HEAD)
 cat debian/changelog
 git add --all ; git commit -m  "debian build"
 debuild -us -uc
