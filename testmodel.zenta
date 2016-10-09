@@ -26,7 +26,10 @@
       <property key="Template"/>
     </element>
     <element xsi:type="zenta:BasicObject" name="Basic Object" id="basicobject"/>
-    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject"/>
+    <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject">
+      <property key="minOccurs" value="0/0"/>
+      <property key="maxOccurs" value="-1/-1"/>
+    </element>
     <element xsi:type="zenta:ZentaDiagramModel" name="Default View" id="3bd9d9b9"/>
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
       <documentation>a class directly descending from Basic Object
