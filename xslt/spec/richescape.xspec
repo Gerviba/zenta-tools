@@ -111,12 +111,22 @@
       <x:expect label="zenta:itemizedlist(items) creates an itemized list from items"
    		test="zenta:assertEquals(
 	   		'Joe, mary, bob',
-	   		string-join(zenta:itemizedlist(//element[@name='Odette']/value/@name)/listitem/@name,', ')
+	   		string-join(zenta:itemizedlist(//element[@name='Odette']/value/@name)/itemizedlist/listitem/@name,', ')
+   		)" />
+      <x:expect label="zenta:itemizedlist(nothing) returns (none)"
+   		test="zenta:assertEquals(
+	   		'(none)',
+	   		zenta:itemizedlist(//element[@name='nothing']/value/@name)
    		)" />
       <x:expect label="zenta:itemizedlist_as_string(items) creates an itemized list from items"
    		test="zenta:assertEquals(
 	   		'Joe, mary, bob',
 	   		string-join(//element[@name='Odette']/documentation/itemizedlist/listitem,', ')
+   		)" />
+      <x:expect label="zenta:itemizedlist_as_string(nothing) returns (none)"
+   		test="zenta:assertEquals(
+	   		'(none)',
+	   		zenta:itemizedlist_as_string(//element[@name='nothing']/value/@name)
    		)" />
 
       <x:expect label="zenta:neighbour(.,relation,direction) gives the list of neighbours through the relation"
