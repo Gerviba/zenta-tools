@@ -8,7 +8,7 @@
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
-	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel']"
+	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel' and @xsi:type!='zenta:SketchModel']"
 		mode="elementDetails">
 		<para>
 			<xsl:value-of select="concat(zenta:capitalize(zenta:articledName(.,'any')),' is ', zenta:articledName(//element[@id=current()/@ancestor],'no'),'.')"/>

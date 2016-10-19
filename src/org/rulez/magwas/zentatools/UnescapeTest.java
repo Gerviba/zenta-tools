@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
@@ -15,7 +14,6 @@ import javax.xml.xpath.XPathFactory;
 
 import org.junit.Test;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 public class UnescapeTest {
 
