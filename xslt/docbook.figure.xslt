@@ -8,15 +8,7 @@
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
-	<!--xsl:template match="element[@xsi:type='zenta:ZentaDiagramModel']" mode="figure">
-		<figure>
-			<title><xsl:value-of select="@name"/></title>
-			<remark><xsl:copy-of select="documentation/(*|text())"/></remark>
-			<mediaobject><imageobject><imagedata fileref="pics/{@id}.png"/></imageobject></mediaobject>
-		</figure>
-	</xsl:template-->
-
-	<xsl:template match="element[@xsi:type='zenta:ZentaDiagramModel']" mode="figure">
+	<xsl:template match="element[@xsi:type='zenta:ZentaDiagramModel' or @xsi:type='zenta:SketchModel']" mode="figure">
 		<figure>
 			<title><xsl:value-of select="@name"/></title>
 			<remark><xsl:copy-of select="documentation/(*|text())"/></remark>

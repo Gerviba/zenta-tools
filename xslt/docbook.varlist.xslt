@@ -9,7 +9,7 @@
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
 		
-	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel']|connection[@name and @direction='1']" mode="varlistentry">
+	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel' and @xsi:type!='zenta:SketchModel']|connection[@name and @direction='1']" mode="varlistentry">
 		<varlistentry>
 			<term>
 				<xsl:apply-templates select="." mode="elementTitle"/>
@@ -22,9 +22,9 @@
 
 	<xsl:template match="folder" mode="varlistList">
 		<para>
-			<xsl:if test="element[@xsi:type!='zenta:ZentaDiagramModel']|connection[@name and @direction='1']">
+			<xsl:if test="element[@xsi:type!='zenta:ZentaDiagramModel' and @xsi:type!='zenta:SketchModel']|connection[@name and @direction='1']">
 				<variablelist>
-					<xsl:apply-templates select="element[@xsi:type!='zenta:ZentaDiagramModel']" mode="varlistentry"/>
+					<xsl:apply-templates select="element[@xsi:type!='zenta:ZentaDiagramModel' and @xsi:type!='zenta:SketchModel']" mode="varlistentry"/>
 					<xsl:apply-templates select="connection[@name and @direction='1']" mode="varlistentry"/>
 				</variablelist>
 			</xsl:if>
@@ -41,7 +41,7 @@
 				<xsl:copy-of select="documentation/(*|text())"/>
 			</para>
 			<para>
-				<xsl:apply-templates select="element[@xsi:type='zenta:ZentaDiagramModel']" mode="figure"/>
+				<xsl:apply-templates select="element[@xsi:type='zenta:ZentaDiagramModel' or @xsi:type='zenta:SketchModel']" mode="figure"/>
 			</para>
 			<xsl:apply-templates select="folder" mode="varlist">
 				<xsl:sort select="@name"/>

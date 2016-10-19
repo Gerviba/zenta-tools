@@ -8,7 +8,7 @@
 
 	<xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes" omit-xml-declaration="yes"/>
 
-	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel']" mode="elementTitle">
+	<xsl:template match="element[@xsi:type!='zenta:ZentaDiagramModel' and @xsi:type!='zenta:SketchModel']" mode="elementTitle">
 		<anchor id="{@id}"/>
 		<xsl:value-of select="@name"/>
 	</xsl:template>
