@@ -192,7 +192,7 @@
 	<x:scenario label="maxOccurs documentation">
 		<x:expect label="if maxOccurs != 0, then listitem denotes it"
 	     	test="zenta:assertEquals(
-	     		'man points to at least 1 and at most 1 target',
+	     		'man points to at most 1 target',
 	     		zenta:normalizeAllSpaces(//varlistentry[term/text()='man']/listitem/para/itemizedlist/listitem[3]//text())
 	     		)
 	     		"/>
