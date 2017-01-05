@@ -2,13 +2,15 @@
 set -xe
 export DISPLAY=:99.0
 /sbin/start-stop-daemon --start --quiet --pidfile /tmp/cucumber_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x24
-echo DEBUILD_PRESERVE_ENVVARS=DISPLAY | dd of=~/.devscripts
-apt-get -y install debhelper devscripts
+echo DEBUILD_PRESERVE_ENVVARS=DISPLAY,version,normalized_branch,fullversion | dd of=~/.devscripts
+apt-get -y remove openjdk-7-jre openjdk-7-jre-headless
+. bin/versioning
 make install
 make clean
-git checkout -b build
-normalized_branch=$(echo $BRANCH|sed 'sA[/_]A.Ag')
-dch --force-distribution -D $normalized_branch -v 0.1-1.$normalized_branch.$BUILD_NUMBER commit $(git rev-parse HEAD)
+oldbranch=$(git branch|grep "^\*"|sed 's/^..//')
+git checkout -b build$(date +%s)
+dch --force-distribution -D $normalized_branch -v $fullversion commit $(git rev-parse HEAD)
 cat debian/changelog
 git add --all ; git commit -m  "debian build"
 debuild -us -uc
+git checkout $oldbranch

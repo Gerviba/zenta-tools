@@ -7,16 +7,17 @@ all: zentaworkaround tests testmodel.compiled zenta-tools.compiled misc.compiled
 
 ZENTATOOLS=$(shell pwd)
 
-zenta-tools.jar: classes
-	cp -r xslt classes
-	cd classes ; zip -ro ../zenta-tools.jar .
+zenta-tools.jar:
+	mvn install
 
 model.rules: model.rules.in
 	sed s,ZENTADATA,$(datadir), <$< >$@
 
 install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather model.rules
 	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
-	install zenta-tools.jar $(DESTDIR)$(jardir)
+	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
+	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
+	ln -sf zenta-tools-$$version.jar $(DESTDIR)$(jardir)/zenta-tools.jar
 	install bin/csv2xml $(DESTDIR)$(bindir)
 	install bin/getGithubIssues $(DESTDIR)$(bindir)
 	install bin/getJiraIssues $(DESTDIR)$(bindir)
@@ -41,10 +42,6 @@ zentaworkaround:
 	cp workbench.xmi ~/.zenta/.metadata/.plugins/org.eclipse.e4.workbench/
 	touch zentaworkaround
 
-classes: src/net/sf/saxon/trans/RelativeUriResolver.java
-	mkdir -p classes
-	javac -cp /usr/local/lib/saxon9.jar -d classes src/net/sf/saxon/trans/RelativeUriResolver.java
-	javac -cp /usr/local/lib/saxon9.jar -d classes src/org/rulez/magwas/zentatools/XPathFunctions.java
 
 clean:
 	git clean -fdx
@@ -61,7 +58,7 @@ testmodel.consistencycheck: testmodel.check testmodel.rich testmodel.objlist
 	zenta-xslt-runner -xsl:xslt/consistencycheck.xslt -s:testmodel.check -o:testmodel.consistencycheck debug=true 2>&1 | sed 's/\//:/'  |sort --field-separator=':' --key=2
 
 testenv:
-	docker run --rm -p 5900:5900 -v $$(pwd):/zentatools -it magwas/zenta-tools /bin/bash
+	docker run --rm -p 5900:5900 -w /zentatools -v $$(pwd):/zentatools -it magwas/zenta-tools /bin/bash
 
 inputs/testmodel.issues.xml:
 	mkdir -p inputs

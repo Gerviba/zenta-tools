@@ -1,3 +1,9 @@
+zenta-tools (0.1-1ubuntu2) -v; urgency=medium
+
+  * 0.2-1.. commit dc44b3d3bc0f238759c7859ada4476cf711f7226
+
+ -- root <root@c1b074544b0e>  Thu, 05 Jan 2017 22:17:31 +0000
+
 zenta-tools (0.1-1ubuntu1) -v; urgency=medium
 
   * 0.1-1.. commit 0c19e2ec9e39fb072b40a59013243b19c2ef04ba

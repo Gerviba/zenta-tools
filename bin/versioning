@@ -1,0 +1,4 @@
+export normalized_branch=$(echo $BRANCH|sed 'sA[/_]A.Ag')
+export version=$(cat VERSION)
+export fullversion=$version-1.$normalized_branch.$BUILD_NUMBER
+sed -i 's|<artifactId>zenta-tools</artifactId><version>.*</version>|<artifactId>zenta-tools</artifactId><version>'"$version"'</version>|' pom.xml

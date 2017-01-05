@@ -35,6 +35,7 @@ RUN ln -s /home/develop/build /root/build
 RUN git config --global user.email "mag+xsltbuilder@magwas.rulez.org"
 RUN git config --global user.name "magwas/edemotest:xslt docker image"
 
+RUN apt-get -y remove openjdk-7-jre openjdk-7-jre-headless
 CMD sudo su - develop
 
 
