@@ -62,7 +62,7 @@ public class XPathFunctions {
 		return ret;
 	}
 	public static StreamSource fromVerbatim(String str) {
-		str = "<screen><![CDATA["+str+"]]></screen>";
+		str = "<screen><![CDATA[\n"+str+"]]></screen>";
 		StreamSource ret = new StreamSource(new StringReader(str));
 		return ret;
 	}

@@ -15,6 +15,6 @@ public class FromVerbatimTest extends MarkupTest {
 		
 		StreamSource foo = XPathFunctions.fromVerbatim(testString);
 		String target = IOUtils.toString(foo.getReader());
-		assertEquals("<screen><![CDATA[short example\n\nin two paragraphs]]></screen>", target);
+		assertEquals("<screen><![CDATA[\nshort example\n\nin two paragraphs]]></screen>", target);
 	}
 }
