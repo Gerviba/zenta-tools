@@ -76,7 +76,17 @@
 
 <xsl:template match="documentation|purpose" mode="unescape">
 	<xsl:copy>
-		<xsl:copy-of select="zentatools:unescape(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
+		<xsl:choose>
+			<xsl:when test="ancestor::*/property[@key='documentationMarkup'and @value='MediaWiki']">
+				<xsl:copy-of select="zentatools:fromMediaWikiToXhtml(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
+			</xsl:when>
+			<xsl:when test="ancestor::*/property[@key='documentationMarkup'and @value='verbatim']">
+				<xsl:copy-of select="zentatools:fromVerbatim(.)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="zentatools:unescape(.)/root/(*|@*|text()|processing-instruction()|comment())"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:copy>
 </xsl:template>
 

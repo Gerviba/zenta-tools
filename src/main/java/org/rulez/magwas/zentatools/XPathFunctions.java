@@ -13,7 +13,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import info.bliki.wiki.addon.docbook.DocbookGenerator;
 import info.bliki.wiki.model.WikiModel;
 
 class UnescapeException extends Exception {
@@ -45,20 +44,26 @@ public class XPathFunctions {
 		return new StreamSource(new StringReader(str));
 	}
 
-	public static StreamSource fromMediaWiki(String inputString) throws Exception {
-		DocbookGenerator generator = new DocbookGenerator();
+	public static StreamSource fromMediaWikiToXhtml(String inputString) throws Exception {
 		String xhtml=WikiModel.toHtml(inputString);
-		String docbook = generator.create(xhtml, "", "</body></html>", "");
+		xhtml = "<root>"+xhtml+"</root>";
+		xhtml = xhtml.replaceAll("<p>", "<para>");
+		xhtml = xhtml.replaceAll("</p>", "</para>");
 		try {
-			loadXMLFromString(docbook);
+			loadXMLFromString(xhtml);
 		} catch (SAXException e) {
-			throw new UnescapeException(docbook);
+			throw new UnescapeException(xhtml);
 		} catch (Exception e) {
 			throw e;
 		}
 		 {
 		 }
-		StreamSource ret = new StreamSource(new StringReader(docbook));
+		StreamSource ret = new StreamSource(new StringReader(xhtml));
+		return ret;
+	}
+	public static StreamSource fromVerbatim(String str) {
+		str = "<screen><![CDATA["+str+"]]></screen>";
+		StreamSource ret = new StreamSource(new StringReader(str));
 		return ret;
 	}
 
@@ -69,4 +74,5 @@ public class XPathFunctions {
 	    InputSource is = new InputSource(new StringReader(xml));
 	    return builder.parse(is);
 	}
+
 }

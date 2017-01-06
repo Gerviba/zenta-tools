@@ -27,10 +27,17 @@
     </element>
     <element xsi:type="zenta:BasicObject" name="Basic Object" id="basicobject"/>
     <element xsi:type="zenta:BasicRelationship" name="Basic Relation" id="basicrelation" source="basicobject" target="basicobject">
-      <property key="minOccurs" value="0/0"/>
+      <property key="minOccurs" value="-1/-1"/>
       <property key="maxOccurs" value="-1/-1"/>
     </element>
-    <element xsi:type="zenta:ZentaDiagramModel" name="Default View" id="3bd9d9b9"/>
+    <element xsi:type="zenta:ZentaDiagramModel" name="Default View" id="3bd9d9b9">
+      <child xsi:type="zenta:DiagramObject" id="8b0a4822-faeb-4a8e-a9ad-7cbc3ae4e7e3" zentaElement="fa5955b0-cb81-4072-aa18-174fb052005f">
+        <bounds x="378" y="167" width="-1" height="-1"/>
+      </child>
+      <child xsi:type="zenta:DiagramObject" id="d4c5215d-40a0-4e74-a52a-b659456ab5d5" zentaElement="908a7a75-7c55-4233-b77c-35a8c595a78c">
+        <bounds x="539" y="293" width="-1" height="-1"/>
+      </child>
+    </element>
     <element xsi:type="zenta:BasicObject" name="man" id="a63d2d0e" ancestor="basicobject">
       <documentation>a class directly descending from Basic Object
 Raises:
@@ -110,6 +117,31 @@ Raises:
       <property key="font"/>
       <property key="maxOccurs" value="-1/-1"/>
       <property key="minOccurs" value="/"/>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="verbatimTest" id="fa5955b0-cb81-4072-aa18-174fb052005f" ancestor="basicobject">
+      <documentation>
+/foo&amp;bar List&lt;String>[3]
+new line
+
+new para
+- list
+- list2
+</documentation>
+      <property key="documentationMarkup" value="verbatim"/>
+    </element>
+    <element xsi:type="zenta:BasicObject" name="Wikitest" id="908a7a75-7c55-4233-b77c-35a8c595a78c" ancestor="basicobject">
+      <documentation>/foo&amp;bar List&lt;String>[3]
+new line
+
+new para
+* Start each line
+* with an [[Wikipedia:asterisk|asterisk]] (*).
+** More asterisks give deeper
+*** and deeper levels.
+* Line breaks &lt;br />don't break levels.
+*** But jumping levels creates empty space.
+</documentation>
+      <property key="documentationMarkup" value="MediaWiki"/>
     </element>
   </folder>
   <folder name="instances" id="faa91182">

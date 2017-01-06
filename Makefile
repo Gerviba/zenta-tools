@@ -17,7 +17,8 @@ install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather model
 	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
 	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
 	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
-	ln -sf zenta-tools-$$version.jar $(DESTDIR)$(jardir)/zenta-tools.jar
+	install target/zenta-tools-$$version-jar-with-dependencies.jar $(DESTDIR)$(jardir)
+	ln -sf zenta-tools-$$version-jar-with-dependencies.jar $(DESTDIR)$(jardir)/zenta-tools.jar
 	install bin/csv2xml $(DESTDIR)$(bindir)
 	install bin/getGithubIssues $(DESTDIR)$(bindir)
 	install bin/getJiraIssues $(DESTDIR)$(bindir)

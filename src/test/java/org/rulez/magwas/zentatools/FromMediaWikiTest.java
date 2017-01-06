@@ -6,15 +6,15 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.junit.Test;
 
-public class FromAsciiDocTest extends MarkupTest {
+public class FromMediaWikiTest extends MarkupTest {
 
 	@Test
-	public void testFromAsciidoc() throws Exception{
+	public void testFromMediaWikiToXhtml() throws Exception{
 		String testString = "short example\n\nin two paragraphs";
 		
-		StreamSource foo = XPathFunctions.fromMediaWiki(testString);
+		StreamSource foo = XPathFunctions.fromMediaWikiToXhtml(testString);
 		
-		String baz = evaluateXpathOnSource(foo, "/book/para[2]");
+		String baz = evaluateXpathOnSource(foo, "/root/para[2]");
 		assertEquals("in two paragraphs",baz);
 	}
 
