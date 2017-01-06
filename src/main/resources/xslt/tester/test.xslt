@@ -8,7 +8,7 @@
    xmlns:zentatools="java:org.rulez.magwas.zentatools.XPathFunctions"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<xsl:include href="../functions.xslt"/>
+	<xsl:include href="xslt/functions.xslt"/>
 	
 	<xsl:param name="tests"/>
 	<xsl:param name="terminate" select="'yes'"/>

@@ -81,7 +81,7 @@
       	"/>
 
       <x:expect label="nonempty file results nonemptyness"
-      	test="exists(document('test.xslt'))
+      	test="exists(document('docbook.local.xslt'))
       	"/>
 
       <x:expect label="the component elements have the errors from the report file"
