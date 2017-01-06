@@ -13,7 +13,7 @@
 
       <x:expect label="documentationMarkup=verbatim property makes the documentation verbatim style"
    		test="zenta:assertEquals(
-			'&#xA;/foo&amp;bar List&lt;String&gt;[3]&#xA;new line&#xA;&#xA;new para&#xA;- list&#xA;- list2&#xA;',
+			'&#xA;&#xA;/foo&amp;bar List&lt;String&gt;[3]&#xA;new line&#xA;&#xA;new para&#xA;- list&#xA;- list2&#xA;',
 	   		//element[@name='verbatimTest']/documentation/screen/text()
    		)" />
 
