@@ -6,21 +6,16 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.junit.Test;
 
-public class ToAsciiBookTest extends MarkupTest {
+public class FromAsciiDocTest extends MarkupTest {
 
 	@Test
 	public void testFromAsciidoc() throws Exception{
 		String testString = "short example\n\nin two paragraphs";
 		
-		StreamSource foo = (StreamSource) fromAsciidoc(testString);
+		StreamSource foo = XPathFunctions.fromMediaWiki(testString);
 		
-		String baz = evaluateXpathOnSource(foo, "/root/para[2]");
+		String baz = evaluateXpathOnSource(foo, "/book/para[2]");
 		assertEquals("in two paragraphs",baz);
-	}
-
-	private StreamSource fromAsciidoc(String testString) {
-		
-		return null;
 	}
 
 }

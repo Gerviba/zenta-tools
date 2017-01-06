@@ -26,5 +26,15 @@
   		<artifactId>junit</artifactId>
   		<version>4.12</version>
   	</dependency>
+  	<dependency>
+  		<groupId>info.bliki.wiki</groupId>
+  		<artifactId>bliki-core</artifactId>
+  		<version>3.1.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>info.bliki.wiki</groupId>
+  		<artifactId>bliki-addons</artifactId>
+  		<version>3.1.0</version>
+  	</dependency>
   </dependencies>
 </project>

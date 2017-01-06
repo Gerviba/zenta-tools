@@ -13,6 +13,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import info.bliki.wiki.addon.docbook.DocbookGenerator;
+import info.bliki.wiki.model.WikiModel;
+
 class UnescapeException extends Exception {
 
 	private static final long serialVersionUID = 1L;
@@ -30,16 +33,33 @@ public class XPathFunctions {
 		str = str.replaceAll("&gt;", ">");
 		str = str.replaceAll("&quot;", "\"");
 		str = "<root>"+str+"</root>";
-			try {
-				loadXMLFromString(str);
-			} catch (SAXException e) {
-				throw new UnescapeException(str);
-			} catch (Exception e) {
-				throw e;
-			}
-		 {
+		try {
+			loadXMLFromString(str);
+		} catch (SAXException e) {
+			throw new UnescapeException(str);
+		} catch (Exception e) {
+			throw e;
 		}
+		 {
+		 }
 		return new StreamSource(new StringReader(str));
+	}
+
+	public static StreamSource fromMediaWiki(String inputString) throws Exception {
+		DocbookGenerator generator = new DocbookGenerator();
+		String xhtml=WikiModel.toHtml(inputString);
+		String docbook = generator.create(xhtml, "", "</body></html>", "");
+		try {
+			loadXMLFromString(docbook);
+		} catch (SAXException e) {
+			throw new UnescapeException(docbook);
+		} catch (Exception e) {
+			throw e;
+		}
+		 {
+		 }
+		StreamSource ret = new StreamSource(new StringReader(docbook));
+		return ret;
 	}
 
 	private static Document loadXMLFromString(String xml) throws ParserConfigurationException, SAXException, IOException
