@@ -8,7 +8,7 @@
 
 <xsl:import href="/usr/share/xml/docbook/stylesheet/docbook-xsl/html/docbook.xsl"/>
 
-<xsl:output method="xhtml" version="1.1" encoding="utf-8" indent="yes" omit-xml-declaration="no"/>
+<xsl:output method="html" version="4.0" encoding="utf-8" indent="yes" omit-xml-declaration="no"/>
 
 <xsl:param name="toc.section.depth">3</xsl:param>
 <xsl:param name="html.stylesheet">structured.css</xsl:param>
