@@ -2,6 +2,7 @@ prefix = /usr
 bindir = $(prefix)/bin
 jardir = $(prefix)/share/zenta-tools/
 datadir = $(prefix)/share/zenta-tools/
+version = `cat VERSION`
 
 all: zentaworkaround tests testmodel.compiled zenta-tools.compiled misc.compiled
 
@@ -15,10 +16,10 @@ model.rules: model.rules.in
 
 install: zenta-tools.jar bin.install/zenta-xslt-runner bin.install/xpather model.rules
 	install -d $(DESTDIR)$(datadir) $(DESTDIR)$(bindir)
-	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
-	install target/zenta-tools-$$version.jar $(DESTDIR)$(jardir)
-	install target/zenta-tools-$$version-jar-with-dependencies.jar $(DESTDIR)$(jardir)
-	ln -sf zenta-tools-$$version-jar-with-dependencies.jar $(DESTDIR)$(jardir)/zenta-tools.jar
+	install target/zenta-tools-$(version).jar $(DESTDIR)$(jardir)
+	install target/zenta-tools-$(version).jar $(DESTDIR)$(jardir)
+	install target/zenta-tools-$(version)-jar-with-dependencies.jar $(DESTDIR)$(jardir)
+	ln -sf zenta-tools-$(version)-jar-with-dependencies.jar $(DESTDIR)$(jardir)/zenta-tools.jar
 	install bin/csv2xml $(DESTDIR)$(bindir)
 	install bin/getGithubIssues $(DESTDIR)$(bindir)
 	install bin/getJiraIssues $(DESTDIR)$(bindir)
